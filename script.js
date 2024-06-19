@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // STARTボタンをクリックしたときのイベントリスナー
     document.getElementById('startButton').addEventListener('click', () => {
+        console.log("STARTボタンがクリックされました"); // デバッグ用のログ出力
         // 初期画面を非表示にし、画面遷移先1を表示
         initialScreen.style.display = 'none';
         screen1.style.display = 'block';
@@ -13,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 画面遷移先1の次へボタンをクリックしたときのイベントリスナー
     document.getElementById('nextButton1').addEventListener('click', () => {
+        console.log("次へボタンがクリックされました"); // デバッグ用のログ出力
         // 画面遷移先1を非表示にし、画面遷移先2を表示
         screen1.style.display = 'none';
         screen2.style.display = 'block';
