@@ -10,6 +10,7 @@ body {
     font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
 }
 
+/*文字やボタンの後ろのうっすら白い半透明の四角用の設定*/
 .container {
     text-align: center; /* テキストを中央揃え */
     background-color: rgba(255, 255, 255, 0.8); /* 背景色を白色で半透明に設定 */
@@ -17,32 +18,7 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウを設定 */
     border-radius: 10px; /* 角を丸くする */
 }
-
-h1 {
-    font-size: 3rem; /* フォントサイズを設定 */
-    margin-bottom: 20px; /* 下の余白を設定 */
-    color: #333; /* 文字色を設定 */
-}
-
-button {
-    font-size: 1.5rem; /* フォントサイズを設定 */
-    padding: 10px 20px; /* 内側の余白を設定 */
-    cursor: pointer; /* カーソルをポインタに設定 */
-    background-color: #007bff; /* ボタンの背景色を設定 */
-    color: white; /* 文字色を白に設定 */
-    border: none; /* ボーダーをなしに設定 */
-    border-radius: 5px; /* 角を丸くする */
-    transition: background-color 0.3s ease, transform 0.3s ease; /* ホバー時のトランジションを設定 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ボックスシャドウを設定 */
-    margin: 10px; /* 外側の余白を設定 */
-}
-
-button:hover {
-    background-color: #0056b3; /* ホバー時の背景色を設定 */
-    transform: scale(1.05); /* ホバー時にボタンを少し大きくする */
-}
-
-
+/*タイトルの「BINGO」用の設定*/
 .container2 {
     display: flex;
     justify-content: center;
@@ -51,6 +27,83 @@ button:hover {
 }
 
 
+
+/*
+
+<h1>◯◯</h1>：１番大きな見出し
+<h2>◯◯</h2>：２番目に大きな見出し
+<h3>◯◯</h3>：３番目に大きな見出し
+<p>◯◯</p>：段落
+
+
+・文字、色系
+font-size:                  フォントサイズを設定
+color: #333;                文字色を設定 
+background-color: #007bff　 背景色を設定 
+border: none;               ボーダー設定
+
+・余白系
+padding:　　　　　　          内側の余白を設定 
+margin-bottom:              下の余白を設定 
+margin:                      外側の余白を設定 
+
+
+*/
+
+
+h1 {
+    font-size: 3rem; 
+    margin-bottom: 20px; 
+    color: #333;
+}
+
+button {
+    font-size: 1.5rem; 
+    padding: 10px 20px;
+    cursor: pointer; 
+    background-color: #007bff; 
+    color: white; 
+    border: none; 
+    border-radius: 5px; 
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    margin: 10px; 
+}
+
+button:hover {
+    background-color: #0056b3; /* ホバー時の背景色を設定 */
+    transform: scale(1.05); /* ホバー時にボタンを少し大きくする */
+}
+
+
+/*
+これは右上に設置する「タイトルに戻る」用の設定
+このボタンは　背景：白　文字色；青　　である上に右上配置なので別でCSSを設定。
+*/
+.back-button {
+    position: fixed; /* 画面固定位置に配置 */
+    top: 20px; /* 位置調整 */
+    right: 20px;
+    font-size: 1rem; /* フォントサイズ設定 */
+    padding: 10px 20px; 
+    cursor: pointer; /* ポインター形状設定 */
+    background-color: #ffffff; 
+    color: rgb(27, 3, 241);
+    border: none;
+    border-radius: 5px; /* 角丸設定 */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* トランジション効果設定 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ボックスシャドウ設定 */
+    z-index: 1; /* ボタンを他の要素の上に配置 */
+}
+
+.back-button:hover {
+    background-color: #0056b3; /* ホバー時の背景色設定 */
+    transform: scale(1.05); /* ホバー時の拡大設定 */
+}
+
+
+
+/*「BINGO」の文字を〇で囲うための設定*/
 .circle {
     display: flex;
     justify-content: center;
@@ -68,58 +121,45 @@ button:hover {
     animation: pulse 2s infinite; /* アニメーションを追加 */
 }
 
-/*
-.circle:hover {
-    transform: scale(1.1);
-}
-*/
 
 /* 個別にアニメーション適用 */
 .circle:nth-child(1) {
-    animation-delay: 0.2s;
-    background-color: #00eeff;
+    animation-delay: 0.2s; /* アニメーション遅延時間設定 */
+    background-color: #00eeff; /* 背景色設定 */
 }
 
 .circle:nth-child(2) {
-    animation-delay: 0.4s;
-    background-color: #ff0000;
+    animation-delay: 0.4s; /* アニメーション遅延時間設定 */
+    background-color: #ff0000; /* 背景色設定 */
 }
 
 .circle:nth-child(3) {
-    animation-delay: 0.6s;
-    background-color: #eff309;
+    animation-delay: 0.6s; /* アニメーション遅延時間設定 */
+    background-color: #eff309; /* 背景色設定 */
 }
 
 .circle:nth-child(4) {
-    animation-delay: 0.8s;
-    background-color: #0be70b;
+    animation-delay: 0.8s; /* アニメーション遅延時間設定 */
+    background-color: #0be70b; /* 背景色設定 */
 }
 
 .circle:nth-child(5) {
-    animation-delay: 1s;
-    background-color: #d50ee7;
+    animation-delay: 1s; /* アニメーション遅延時間設定 */
+    background-color: #d50ee7; /* 背景色設定 */
 }
 
-.back-button {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    font-size: 1rem;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #ffffff;
-    color: rgb(27, 3, 241);
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    z-index: 1; /* ボタンを他の要素の上に配置 */
-}
 
-.back-button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
-}
+
+
+
+
+
+
+
+
+
+
+
 
 @keyframes pulse {
     0% {
