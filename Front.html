@@ -7,10 +7,28 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>ビンゴの番号を入力</h1>
+    <!-- 最初の画面 -->
+    <div class="container" id="initialScreen">
+        <h1>BINGO</h1>
         <button id="startButton">START</button>
     </div>
+
+    <!--- 入力画面-->
+    <div class ="container" id = "inputScreen">
+        <h1></h1>
+    
+    <!-- 画面遷移先1 -->
+    <div class="container" id="screen1" style="display: none;">
+        <h1>画面遷移先1</h1>
+        <button id="nextButton1">次へ</button>
+    </div>
+    
+    <!-- 画面遷移先2 -->
+    <div class="container" id="screen2" style="display: none;">
+        <h1>画面遷移先2</h1>
+        <p>ここが最終画面です。</p>
+    </div>
+    
     <script src="scripts.js"></script>
 </body>
 </html>
