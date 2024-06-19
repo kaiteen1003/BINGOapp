@@ -8,14 +8,18 @@
 </head>
 <body>
     <main>
-        <h1>imput</h1>
+        <h1>input</h1>
         <h2>穴をあけるBINGOの番号を入力してください。</h2>
-        <form action="#" id="form">
+        <form>
         <input type="number" id="numeric" name="numeric" min="1" max="100" />
-        <imput type="submit" value="入力">
+        <button type="submit" onclick="displayNumber()">入力</button>
         </form>  
-        <p id="output"></p>
+        <script>
+            function displayNumber() {
+              var numeric = document.getElementById("numeric").value;
+              alert(numeric);
+            }
+          </script>
     </main>
-    <script src="scripts.js"></script>
 </body>
 </html>
