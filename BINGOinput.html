@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BINGO app</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <h1>ビンゴカードの番号を入力してください</h1>
+        <input type ="number" id ="BINGOnum" name ="BINGOnumber" min="0">
+        <button type = "submit">入力</button>
+        <br>
+        <h2>BINGOの左上から番号を入力してください。</h2>
+        <form>
+        <input type="number" id="numeric" name="numeric" min="1" max="100" />
+        <button type="submit" onclick="displayNumber()">入力</button>
+        </form>  
+        <script>
+            function displayNumber() {
+              var numeric = document.getElementById("numeric").value;
+              alert(numeric);
+            }
+          </script>
+    </main>
+</body>
+</html>

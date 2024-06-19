@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 document.addEventListener('DOMContentLoaded', () => {
     // 初期画面の要素を取得
     const initialScreen = document.getElementById('initialScreen');
@@ -18,3 +19,13 @@ document.addEventListener('DOMContentLoaded', () => {
         screen2.style.display = 'block';
     });
 });
+=======
+'use strinct';
+
+document.getElementById('form').onsubmit = function (event) {
+        event.preventDefault();
+        let inputForm = document.getElementById('form').content.value;
+        document.getElementById('output').textContent = `${inputForm}`;
+      }
+    // ここにゲームの開始ロジックを追加します
+>>>>>>> fb61c4a0f9109131213567ee4e28271553c3e479
