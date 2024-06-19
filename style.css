@@ -1,43 +1,43 @@
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-    background-image: url("./picture/background1.png");
-    background-size: cover;
-    background-position: center;
-    font-family: 'Arial', sans-serif;
+    display: flex; /* Flexboxレイアウトを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ */
+    height: 100vh; /* ビューポートの高さを100% */
+    margin: 0; /* マージンをゼロに設定 */
+    background-image: url("./picture/background1.png"); /* 背景画像を設定 */
+    background-size: cover; /* 背景画像を全体にフィット */
+    background-position: center; /* 背景画像を中央に配置 */
+    font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
 }
 
 .container {
-    text-align: center;
-    background-color: rgba(255, 255, 255, 0.8); /* 背景の透過 */
-    padding: 40px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
+    text-align: center; /* テキストを中央揃え */
+    background-color: rgba(255, 255, 255, 0.8); /* 背景色を白色で半透明に設定 */
+    padding: 40px; /* 内側の余白を設定 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* ボックスシャドウを設定 */
+    border-radius: 10px; /* 角を丸くする */
 }
 
 h1 {
-    font-size: 3rem;
-    margin-bottom: 20px;
-    color: #333;
+    font-size: 3rem; /* フォントサイズを設定 */
+    margin-bottom: 20px; /* 下の余白を設定 */
+    color: #333; /* 文字色を設定 */
 }
 
 button {
-    font-size: 1.5rem;
-    padding: 10px 20px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: 10px;
+    font-size: 1.5rem; /* フォントサイズを設定 */
+    padding: 10px 20px; /* 内側の余白を設定 */
+    cursor: pointer; /* カーソルをポインタに設定 */
+    background-color: #007bff; /* ボタンの背景色を設定 */
+    color: white; /* 文字色を白に設定 */
+    border: none; /* ボーダーをなしに設定 */
+    border-radius: 5px; /* 角を丸くする */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* ホバー時のトランジションを設定 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ボックスシャドウを設定 */
+    margin: 10px; /* 外側の余白を設定 */
 }
 
 button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
+    background-color: #0056b3; /* ホバー時の背景色を設定 */
+    transform: scale(1.05); /* ホバー時にボタンを少し大きくする */
 }
