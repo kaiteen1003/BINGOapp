@@ -1,4 +1,8 @@
-document.getElementById('startButton').addEventListener('click', function() {
-    alert('BINGOゲームを始めます！');
+'use strinct';
+
+document.getElementById('form').onsubmit = function (event) {
+        event.preventDefault();
+        let inputForm = document.getElementById('form').content.value;
+        document.getElementById('output').textContent = `${inputForm}`;
+      }
     // ここにゲームの開始ロジックを追加します
-});
