@@ -8,7 +8,67 @@ body {
 }
 
 .container {
-    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* スペースを追加して円を分ける */
+}
+
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    background-color: #00eeff;
+    border-radius: 50%;
+    font-size: 24px;
+    font-weight: bold;
+    /*color: #fff;*/
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /*transition: transform 0.2s;*/
+    animation: pulse 2s infinite; /* アニメーションを追加 */
+}
+
+/*
+.circle:hover {
+    transform: scale(1.1);
+}
+*/
+
+/* 個別にアニメーション適用 */
+.circle:nth-child(1) {
+    animation-delay: 0.2s;
+}
+
+.circle:nth-child(2) {
+    animation-delay: 0.4s;
+}
+
+.circle:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+.circle:nth-child(4) {
+    animation-delay: 0.8s;
+}
+
+.circle:nth-child(5) {
+    animation-delay: 1s;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2); /* 最大拡大サイズ */
+    }
+    100% {
+        transform: scale(1);
+    }
 }
 
 h1 {
@@ -30,4 +90,3 @@ button {
 button:hover {
     background-color: #0056b3;
 }
-/*CSSのコメントアウトはこのように行います*/
