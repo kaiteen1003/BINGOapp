@@ -25,7 +25,7 @@
             height: 10%; /* 画像サイズに応じた高さ */
             resize: none;
             box-sizing: border-box;
-            font-size: 50px;
+            font-size: 36px;
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #000;
             display: flex;
@@ -35,35 +35,35 @@
         }
 
         /* テキストボックスの配置 */
-        .textbox-1 { top: 30.5%; left: 13.5%; }
-        .textbox-2 { top: 30.5%; left: 25%; }
-        .textbox-3 { top: 30.5%; left: 36.5%; }
-        .textbox-4 { top: 30.5%; left: 48%; }
-        .textbox-5 { top: 30.5%; left: 59.5%; }
+        .textbox-11 { top: 30.5%; left: 13.5%; }
+        .textbox-12 { top: 42%; left: 13.5%; }
+        .textbox-13 { top: 53.5%; left: 13.5%; }
+        .textbox-14 { top: 65%; left: 13.5%; }
+        .textbox-15 { top: 76.5%; left: 13.5%; }
 
-        .textbox-6 { top: 42%; left: 13.5%; }
-        .textbox-7 { top: 42%; left: 25%;}
-        .textbox-8 { top: 42%; left: 36.5%; }
-        .textbox-9 { top: 42%; left: 48%; }
-        .textbox-10 { top: 42%; left: 59.5%; }
+        .textbox-21 { top: 30.5%; left: 25%; }
+        .textbox-22 { top: 42%; left: 25%;}
+        .textbox-23 { top: 53.5%; left: 25%; }
+        .textbox-24 { top: 65%; left: 25%; }
+        .textbox-25 { top: 76.5%; left: 25%; }
 
-        .textbox-11 { top: 53.5%; left: 13.5%; }
-        .textbox-12 { top: 53.5%; left: 25%;}
+        .textbox-31 { top: 30.5%; left: 36.5%; }
+        .textbox-32 { top: 42%; left: 36.5%;}
         /* 中央のフリースペースはスキップ */
-        .textbox-13 { top: 53.5%; left: 48%; }
-        .textbox-14 { top: 53.5%; left: 59.5%; }
+        .textbox-34 { top: 65%; left: 36.5%; }
+        .textbox-35 { top: 76.5%; left: 36.5%; }
 
-        .textbox-15 { top: 65%; left: 13.5%; }
-        .textbox-16 { top: 65%; left: 25%; }
-        .textbox-17 { top: 65%; left: 36.5%; }
-        .textbox-18 { top: 65%; left: 48%; }
-        .textbox-19 { top: 65%; left: 59.5%; }
+        .textbox-41 { top: 30.5%; left: 48%; }
+        .textbox-42 { top: 42%; left: 48%; }
+        .textbox-43 { top: 53.5%; left: 48%; }
+        .textbox-44 { top: 65%; left: 48%; }
+        .textbox-45 { top: 76.5%; left: 48%; }
 
-        .textbox-20 { top: 76.5%; left: 13.5%; }
-        .textbox-21 { top: 76.5%; left: 25%; }
-        .textbox-22 { top: 76.5%; left: 36.5%; }
-        .textbox-23 { top: 76.5%; left: 48%;}
-        .textbox-24 { top: 76.5%; left: 59.5%; }
+        .textbox-51 { top: 30.5%; left: 59.5%; }
+        .textbox-52 { top: 42%; left: 59.5%; }
+        .textbox-53 { top: 53.5%; left: 59.5%; }
+        .textbox-54 { top: 65%; left: 59.5%;}
+        .textbox-55 { top: 76.5%; left: 59.5%; }
     </style>
 </head>
 <body>
@@ -72,33 +72,37 @@
         <div class="container">
 
             <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-            <textarea class="square-textbox textbox-1"></textarea>
-            <textarea class="square-textbox textbox-2"></textarea>
-            <textarea class="square-textbox textbox-3"></textarea>
-            <textarea class="square-textbox textbox-4"></textarea>
-            <textarea class="square-textbox textbox-5"></textarea>
-            <textarea class="square-textbox textbox-6"></textarea>
-            <textarea class="square-textbox textbox-7"></textarea>
-            <textarea class="square-textbox textbox-8"></textarea>
-            <textarea class="square-textbox textbox-9"></textarea>
-            <textarea class="square-textbox textbox-10"></textarea>
-            <textarea class="square-textbox textbox-11"></textarea>
-            <textarea class="square-textbox textbox-12"></textarea>
+
+            <input class="square-textbox textbox-11" type="number" id="numeric" name="numeric11" min="1" max="15"></textarea>
+            <input class="square-textbox textbox-12" type="number" id="numeric" name="numeric12" min="1" max="15"></textarea>
+            <input class="square-textbox textbox-13" type="number" id="numeric" name="numeric13" min="1" max="15"></textarea>
+            <input class="square-textbox textbox-14" type="number" id="numeric" name="numeric14" min="1" max="15"></textarea>
+            <input class="square-textbox textbox-15" type="number" id="numeric" name="numeric15" min="1" max="15"></textarea>
+            <input class="square-textbox textbox-21" type="number" id="numeric" name="numeric21" min="16" max="30"></textarea>
+            <input class="square-textbox textbox-22" type="number" id="numeric" name="numeric22" min="16" max="30"></textarea>
+            <input class="square-textbox textbox-23" type="number" id="numeric" name="numeric23" min="16" max="30"></textarea>
+            <input class="square-textbox textbox-24" type="number" id="numeric" name="numeric24" min="16" max="30"></textarea>
+            <input class="square-textbox textbox-25" type="number" id="numeric" name="numeric25" min="16" max="30"></textarea>
+            <input class="square-textbox textbox-31" type="number" id="numeric" name="numeric31" min="31" max="45"></textarea>
+            <input class="square-textbox textbox-32" type="number" id="numeric" name="numeric32" min="31" max="45"></textarea>
             <!-- 中央のフリースペースは空ける -->
-            <textarea class="square-textbox textbox-13"></textarea>
-            <textarea class="square-textbox textbox-14"></textarea>
-            <textarea class="square-textbox textbox-15"></textarea>
-            <textarea class="square-textbox textbox-16"></textarea>
-            <textarea class="square-textbox textbox-17"></textarea>
-            <textarea class="square-textbox textbox-18"></textarea>
-            <textarea class="square-textbox textbox-19"></textarea>
-            <textarea class="square-textbox textbox-20"></textarea>
-            <textarea class="square-textbox textbox-21"></textarea>
-            <textarea class="square-textbox textbox-22"></textarea>
-            <textarea class="square-textbox textbox-23"></textarea>
-            <textarea class="square-textbox textbox-24"></textarea>
+            <input class="square-textbox textbox-34" type="number" id="numeric" name="numeric34" min="31" max="45"></textarea>
+            <input class="square-textbox textbox-35" type="number" id="numeric" name="numeric35" min="31" max="45"></textarea>
+            <input class="square-textbox textbox-41" type="number" id="numeric" name="numeric41" min="46" max="60"></textarea>
+            <input class="square-textbox textbox-42" type="number" id="numeric" name="numeric42" min="46" max="60"></textarea>
+            <input class="square-textbox textbox-43" type="number" id="numeric" name="numeric43" min="46" max="60"></textarea>
+            <input class="square-textbox textbox-44" type="number" id="numeric" name="numeric44" min="46" max="60"></textarea>
+            <input class="square-textbox textbox-45" type="number" id="numeric" name="numeric45" min="46" max="60"></textarea>
+            <input class="square-textbox textbox-51" type="number" id="numeric" name="numeric51" min="61" max="75"></textarea>
+            <input class="square-textbox textbox-52" type="number" id="numeric" name="numeric52" min="61" max="75"></textarea>
+            <input class="square-textbox textbox-53" type="number" id="numeric" name="numeric53" min="61" max="75"></textarea>
+            <input class="square-textbox textbox-54" type="number" id="numeric" name="numeric54" min="61" max="75"></textarea>
+            <input class="square-textbox textbox-55" type="number" id="numeric" name="numeric55" min="61" max="75"></textarea>
+
         </div>
         <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
     </main>
 </body>
 </html>
+
+<!--<input type="number" id="numeric" name="numeric" min="1" max="75" /> -->
