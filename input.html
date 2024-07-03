@@ -19,18 +19,38 @@
             <!-- ページのヘッダーとしてのタイトル -->
             <h2>穴をあけるBINGOの番号を入力してください。</h2>
             <!-- サブタイトルや指示文 -->
-            <form>
+            <form onsubmit="return handleFormSubmit(event)">
                 <!-- 入力フォームの開始 -->
-                <input type="number" id="numeric" name="numeric" min="1" max="100" />
-                <!-- 数字を入力するためのフィールド、1から100までの範囲指定 -->
-                <button type="submit" onclick="displayNumber()">入力</button>
+                <input type="number" id="numeric" name="numeric" min="1" max="75" />
+                <!-- 数字を入力するためのフィールド、1から75までの範囲指定 -->
+                <button type="submit">入力</button>
                 <!-- 入力ボタン、クリック時にdisplayNumber関数を実行 -->
+                <p id="arrayOutput"></p>
             </form>  
             <script>
-                function displayNumber() {
+                let numbersArray = [];
+                //(ローカル)ページロード時にストレージから配列を読み込む
+                window.onload = function() {
+                    if (localStorage.getItem('numbersArray')) {
+                        numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
+                        document.getElementById('arrayOutput').innerText = '配列の内容：' + numbersArray.join(', ');
+                    }
+                };
+
+                // 入力された数字を配列に格納
+                function handleFormSubmit(){
+
                     var numeric = document.getElementById("numeric").value;
-                    alert(numeric + 'が入力されました。');
-                    // 入力された数値を取得し、アラートで表示
+                    if(numeric !== ""){
+                        numbersArray.push(Number(numeric));
+                        //(ローカル)配列をストレージに保存
+                        localStorage.setItem('numbersArray', JSON.stringify(numbersArray));
+
+                        document.getElementById('arrayOutput').innerText = 'これまでの番号：'+ numbersArray.join(',');
+
+                        document.getElementById('numeric').value = '';
+                    }
+                    return true;
                 }
             </script>
         </div>
