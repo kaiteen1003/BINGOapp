@@ -32,6 +32,9 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            overflow: hidden; /* 改行を防ぐ */
+            white-space: nowrap; /* 改行を防ぐ */
+            line-height: 1; /* 行の高さを調整して改行を防ぐ */
         }
 
         /* テキストボックスの配置 */
@@ -42,13 +45,13 @@
         .textbox-5 { top: 30.5%; left: 59.5%; }
 
         .textbox-6 { top: 42%; left: 13.5%; }
-        .textbox-7 { top: 42%; left: 25%;}
+        .textbox-7 { top: 42%; left: 25%; }
         .textbox-8 { top: 42%; left: 36.5%; }
         .textbox-9 { top: 42%; left: 48%; }
         .textbox-10 { top: 42%; left: 59.5%; }
 
         .textbox-11 { top: 53.5%; left: 13.5%; }
-        .textbox-12 { top: 53.5%; left: 25%;}
+        .textbox-12 { top: 53.5%; left: 25%; }
         /* 中央のフリースペースはスキップ */
         .textbox-13 { top: 53.5%; left: 48%; }
         .textbox-14 { top: 53.5%; left: 59.5%; }
@@ -62,43 +65,58 @@
         .textbox-20 { top: 76.5%; left: 13.5%; }
         .textbox-21 { top: 76.5%; left: 25%; }
         .textbox-22 { top: 76.5%; left: 36.5%; }
-        .textbox-23 { top: 76.5%; left: 48%;}
+        .textbox-23 { top: 76.5%; left: 48%; }
         .textbox-24 { top: 76.5%; left: 59.5%; }
     </style>
 </head>
 <body>
     <main>
-        
         <div class="container">
-
             <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-            <textarea class="square-textbox textbox-1"></textarea>
-            <textarea class="square-textbox textbox-2"></textarea>
-            <textarea class="square-textbox textbox-3"></textarea>
-            <textarea class="square-textbox textbox-4"></textarea>
-            <textarea class="square-textbox textbox-5"></textarea>
-            <textarea class="square-textbox textbox-6"></textarea>
-            <textarea class="square-textbox textbox-7"></textarea>
-            <textarea class="square-textbox textbox-8"></textarea>
-            <textarea class="square-textbox textbox-9"></textarea>
-            <textarea class="square-textbox textbox-10"></textarea>
-            <textarea class="square-textbox textbox-11"></textarea>
-            <textarea class="square-textbox textbox-12"></textarea>
+            <textarea class="square-textbox textbox-1" id="textbox-1" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-2" id="textbox-2" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-3" id="textbox-3" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-4" id="textbox-4" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-5" id="textbox-5" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-6" id="textbox-6" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-7" id="textbox-7" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-8" id="textbox-8" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-9" id="textbox-9" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-10" id="textbox-10" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-11" id="textbox-11" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-12" id="textbox-12" maxlength="3"></textarea>
             <!-- 中央のフリースペースは空ける -->
-            <textarea class="square-textbox textbox-13"></textarea>
-            <textarea class="square-textbox textbox-14"></textarea>
-            <textarea class="square-textbox textbox-15"></textarea>
-            <textarea class="square-textbox textbox-16"></textarea>
-            <textarea class="square-textbox textbox-17"></textarea>
-            <textarea class="square-textbox textbox-18"></textarea>
-            <textarea class="square-textbox textbox-19"></textarea>
-            <textarea class="square-textbox textbox-20"></textarea>
-            <textarea class="square-textbox textbox-21"></textarea>
-            <textarea class="square-textbox textbox-22"></textarea>
-            <textarea class="square-textbox textbox-23"></textarea>
-            <textarea class="square-textbox textbox-24"></textarea>
+            <textarea class="square-textbox textbox-13" id="textbox-13" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-14" id="textbox-14" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-15" id="textbox-15" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-16" id="textbox-16" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-17" id="textbox-17" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-18" id="textbox-18" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-19" id="textbox-19" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-20" id="textbox-20" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-21" id="textbox-21" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-22" id="textbox-22" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-23" id="textbox-23" maxlength="3"></textarea>
+            <textarea class="square-textbox textbox-24" id="textbox-24" maxlength="3"></textarea>
         </div>
         <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
     </main>
+    <script>
+        document.querySelectorAll('.square-textbox').forEach((textbox, index, textboxes) => {
+            textbox.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (textboxes[index].value.length > 2) {
+                        textboxes[index].value = textboxes[index].value.slice(0, 2);
+                    }
+                    const nextTextbox = textboxes[index + 1];
+                    if (nextTextbox) {
+                        nextTextbox.focus();
+                    }
+                }
+            });
+
+        });
+    </script>
 </body>
 </html>
