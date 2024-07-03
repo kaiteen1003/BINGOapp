@@ -64,14 +64,30 @@
         .textbox-22 { top: 76.5%; left: 36.5%; }
         .textbox-23 { top: 76.5%; left: 48%;}
         .textbox-24 { top: 76.5%; left: 59.5%; }
+
+        .button {
+            position: absolute;
+            width: 20%; /* 画像サイズに応じた幅 */
+            height: 10%; /* 画像サイズに応じた高さ */
+            resize: none;
+            box-sizing: border-box;
+            font-size: 30px;
+            background-color: rgb(249, 162, 119);
+            border: 1px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .buttontext { top: 76.5%; left: 75%; }
     </style>
 </head>
 <body>
     <main>
-        
         <div class="container">
-
             <img src="picture/BINGOcard.JPG" alt="BINGO Card">
+            <button class="button buttontext" type="submit" onclick="displayNumber()">登録</button>
+                <!-- 入力ボタン、クリック時にdisplayNumber関数を実行 -->
             <textarea class="square-textbox textbox-1"></textarea>
             <textarea class="square-textbox textbox-2"></textarea>
             <textarea class="square-textbox textbox-3"></textarea>
@@ -98,7 +114,15 @@
             <textarea class="square-textbox textbox-23"></textarea>
             <textarea class="square-textbox textbox-24"></textarea>
         </div>
+        <script>
+            function displayNumber() {
+                var numeric = document.getElementById("numeric").value;
+                alert(numeric + 'が入力されました。');
+                // 入力された数値を取得し、アラートで表示
+            }
+        </script>
         <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+        <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
     </main>
 </body>
 </html>
