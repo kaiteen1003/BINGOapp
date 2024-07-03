@@ -33,7 +33,7 @@
                 window.onload = function() {
                     if (localStorage.getItem('numbersArray')) {
                         numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
-                        document.getElementById('arrayOutput').innerText = '配列の内容：' + numbersArray.join(', ');
+                        document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
                     }
                 };
 
