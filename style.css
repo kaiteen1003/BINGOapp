@@ -101,6 +101,30 @@ button:hover {
     transform: scale(1.05); /* ホバー時の拡大設定 */
 }
 
+/*
+これはRegistrationに設置する「このシートを保存する」用の設定
+このボタンは　背景：ピンク　文字色；白　　である上に真ん中下部配置なので別でCSSを設定。
+*/
+.keep-button {
+    position: fixed; /* 画面固定位置に配置 */
+    top: 650px; /* 位置調整 */
+    right: 310px;
+    font-size: 1rem; /* フォントサイズ設定 */
+    padding: 10px 20px; 
+    cursor: pointer; /* ポインター形状設定 */
+    background-color: #f86a9a; 
+    color: #ffffff;
+    border: none;
+    border-radius: 5px; /* 角丸設定 */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* トランジション効果設定 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ボックスシャドウ設定 */
+    z-index: 1; /* ボタンを他の要素の上に配置 */
+}
+
+.keep-button:hover {
+    background-color: #ff1493; /* ホバー時の背景色設定 */
+    transform: scale(1.05); /* ホバー時の拡大設定 */
+}
 
 
 /*「BINGO」の文字を〇で囲うための設定*/
