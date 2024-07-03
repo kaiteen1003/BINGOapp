@@ -50,30 +50,48 @@ margin:                      外側の余白を設定
 
 */
 
+/*その他と主な共通部分は省略*/
 
-h1 {
-    font-size: 3rem; 
-    margin-bottom: 20px; 
-    color: #333;
-}
-
-button {
-    font-size: 1.5rem; 
-    padding: 10px 20px;
-    cursor: pointer; 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
-    margin: 10px; 
-}
-
-button:hover {
-    background-color: #0056b3; /* ホバー時の背景色を設定 */
-    transform: scale(1.05); /* ホバー時にボタンを少し大きくする */
-}
+a.btn-flat {
+    overflow: hidden;
+  
+    padding: 1.5rem 6rem;
+  
+    color: #fff;
+    border-radius: 0;
+    background: #000;
+  }
+  
+  a.btn-flat span {
+    position: relative;
+  }
+  
+  a.btn-flat:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+    width: 100px;
+    height: 100px;
+  
+    content: '';
+    -webkit-transition: all .5s ease-in-out;
+    transition: all .5s ease-in-out;
+    -webkit-transform: translateX(-80%) translateY(-25px);
+    transform: translateX(-80%) translateY(-25px);
+  
+    border-radius: 50%;
+    background: #eb6100;
+  }
+  
+  a.btn-flat:hover:before {
+    width: 400px;
+    height: 400px;
+  
+    -webkit-transform: translateX(-1%) translateY(-175px);
+  
+    transform: translateX(-1%) translateY(-175px);
+  }
 
 
 /*
