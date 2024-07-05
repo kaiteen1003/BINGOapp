@@ -12,5 +12,7 @@ document.getElementById('form').onsubmit = function (event) {
     document.getElementById('output').textContent = `${inputForm}`;
 }
 
-// ここにゲームの開始ロジックを追加します
-// 例えば、ゲームの初期化や、ゲームの開始ボタンを押したときの処理などを追加できます。
+
+
+  
+

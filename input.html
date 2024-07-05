@@ -33,7 +33,7 @@
                 window.onload = function() {
                     if (localStorage.getItem('numbersArray')) {
                         numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
-                        document.getElementById('arrayOutput').innerText = '配列の内容：' + numbersArray.join(', ');
+                        document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
                     }
                 };
 
@@ -55,6 +55,7 @@
             </script>
         </div>
         <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+        <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
     </main>
 </body>
 </html>

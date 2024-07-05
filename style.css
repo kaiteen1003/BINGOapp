@@ -101,7 +101,26 @@ button:hover {
     transform: scale(1.05); /* ホバー時の拡大設定 */
 }
 
+.home-button {
+    position: fixed; /* 画面固定位置に配置 */
+    top: 70px; /* 位置調整 */
+    right: 20px;
+    font-size: 1rem; /* フォントサイズ設定 */
+    padding: 10px 20px; 
+    cursor: pointer; /* ポインター形状設定 */
+    background-color: #ffffff; 
+    color: rgb(27, 3, 241);
+    border: none;
+    border-radius: 5px; /* 角丸設定 */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* トランジション効果設定 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ボックスシャドウ設定 */
+    z-index: 1; /* ボタンを他の要素の上に配置 */
+}
 
+.home-button:hover {
+    background-color: #0056b3; /* ホバー時の背景色設定 */
+    transform: scale(1.05); /* ホバー時の拡大設定 */
+}
 
 /*「BINGO」の文字を〇で囲うための設定*/
 .circle {
