@@ -67,6 +67,23 @@
         .textbox-22 { top: 76.5%; left: 36.5%; }
         .textbox-23 { top: 76.5%; left: 48%;}
         .textbox-24 { top: 76.5%; left: 59.5%; }
+
+        .button {
+            position: absolute;
+            width: 20%; /* 画像サイズに応じた幅 */
+            height: 10%; /* 画像サイズに応じた高さ */
+            resize: none;
+            box-sizing: border-box;
+            font-size: 30px;
+            background-color: rgb(249, 162, 119);
+            border: 1px solid #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .buttontext { top: 76.5%; left: 75%; }
+
     </style>
 </head>
 <body>
@@ -105,6 +122,15 @@
             <input type="text" id="nameInput" placeholder="登録名入力欄">
             <button class="register-button" id="registerButton">登録</button>
         </div>
+        <script>
+            function displayNumber() {
+                var numeric = document.getElementById("numeric").value;
+                alert(numeric + 'が入力されました。');
+                // 入力された数値を取得し、アラートで表示
+            }
+        </script>
+        <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+        <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
     </main>
     <script>
         document.querySelectorAll('.square-textbox').forEach((textbox, index, textboxes) => {
