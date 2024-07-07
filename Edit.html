@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BINGO app</title>
+    <title>BINGO Edit</title>
     <link rel="stylesheet" href="style.css">
     <style>
         .container {
@@ -71,10 +71,8 @@
 </head>
 <body>
     <main>
-
         
         <div class="container">
-            
             <img src="picture/BINGOcard.JPG" alt="BINGO Card">
             <textarea class="square-textbox textbox-1"></textarea>
             <textarea class="square-textbox textbox-2"></textarea>
@@ -101,9 +99,7 @@
             <textarea class="square-textbox textbox-22"></textarea>
             <textarea class="square-textbox textbox-23"></textarea>
             <textarea class="square-textbox textbox-24"></textarea>
-
-            <input type="text" id="nameInput" placeholder="登録名入力欄">
-            <button class="register-button" id="registerButton">登録</button>
+            <button class="register-button" id="registerButton">更新</button> <!-- 更新ボタンに変更 -->
         </div>
     </main>
     <script>
@@ -133,31 +129,44 @@
 
         const db = firebase.firestore();
 
-        document.querySelector('#registerButton').addEventListener('click', function() {
-    const textboxes = document.querySelectorAll('.square-textbox');
-    let values = [];
-    textboxes.forEach(textbox => {
-        values.push(textbox.value);
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            // ローカルストレージから選択したビンゴカードのIDとデータを取得
+            const docId = localStorage.getItem('selectedBingoCardId');
+            const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
 
-    // 名前入力フィールドから名前を取得
-    const name = document.getElementById('nameInput').value;
+            // データが存在する場合、テキストボックスに表示
+            if (docId && data) {
+                const textboxes = document.querySelectorAll('.square-textbox');
+                textboxes.forEach((textbox, index) => {
+                    textbox.value = data.values[index] || ''; // データが存在すれば代入、なければ空文字をセット
+                });
+            } else {
+                console.log('No document ID or data found in localStorage.');
+            }
+            
+            // 更新ボタンのクリックイベントリスナーを設定
+            document.querySelector('#registerButton').addEventListener('click', function() {
+                const textboxes = document.querySelectorAll('.square-textbox');
+                let values = [];
+                textboxes.forEach(textbox => {
+                    values.push(textbox.value);
+                });
 
-    // 名前をFirestoreのドキュメントIDとして使用して保存
-    db.collection('BINGOApp').doc(name).set({
-        values: values,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    })
-    .then(function() {
-        console.log('ドキュメントが正常に書き込まれました！');
-        alert('Name: '+name+'BINGOカードが正常に保存されました。');
-    })
-    .catch(function(error) {
-        console.error('ドキュメントの書き込みエラー：', error);
-        alert('データの保存に失敗しました：' + error.message);
-    });
-});
-
+                // Save to Firestore
+                db.collection('BINGOApp').doc(docId).update({
+                    values: values,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                })
+                .then(function() {
+                    console.log('Document updated successfully.');
+                    alert(docId+'の更新が完了しました。');
+                })
+                .catch(function(error) {
+                    console.error('Error updating document:', error);
+                    alert('更新に失敗しました: ' + error.message);
+                });
+            });
+        });
     </script>
 </body>
 </html>
