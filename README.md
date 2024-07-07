@@ -64,9 +64,8 @@ BINGOapp
 ## ディレクトリ構成
 
 <!-- Treeコマンドを使ってディレクトリ構成を記載 -->
-
 ❯ tree -a -I "node_modules|.next|.git|.pytest_cache|static" -L 2
-C:.
+.C:.
 |   .gitignore
 |   Check.html
 |   Edit.html
@@ -88,6 +87,7 @@ C:.
 │   └── workflows
 ├── .gitignore
 ├── README.md
+
 
 
 
