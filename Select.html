@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BINGO Check</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>フォルダを選択してください</h1>
+        <div id="bingoList">
+            <!-- ドキュメントIDの一覧がここに表示されます -->
+        </div>
+    </div>
+    <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+    <script>
+        // Firebaseの初期化
+        firebase.initializeApp({
+            apiKey: "AIzaSyBFglLx2pDfHSpyEUUpn0c939BWS1vmzQg",
+            projectId: "bingoapp-8c5c0",
+        });
+
+        const db = firebase.firestore();
+
+        // ビンゴカード一覧を取得して表示
+        function loadBingoCards() {
+            db.collection('BINGOApp').orderBy('timestamp', 'desc').get()
+            .then((querySnapshot) => {
+                const bingoList = document.getElementById('bingoList');
+                querySnapshot.forEach((doc) => {
+                    const bingoCard = document.createElement('div');
+                    bingoCard.className = 'bingo-card';
+                    bingoCard.textContent = `Name: ${doc.id}`;
+                    bingoCard.addEventListener('click', () => {
+                        // カードがクリックされたときの処理
+                        selectBingoCard(doc.id);
+                    });
+                    bingoList.appendChild(bingoCard);
+                    bingoList.appendChild(document.createElement('br')); // 改行を追加
+                });
+            })
+            .catch((error) => {
+                console.error('Error getting documents: ', error);
+            });
+        }
+
+        // ビンゴカードが選択されたときの処理
+        function selectBingoCard(docId) {
+            // FirebaseからドキュメントIDに対応するデータを取得する
+            db.collection('BINGOApp').doc(docId).get()
+            .then((doc) => {
+                if (doc.exists) {
+                    // ドキュメントが存在する場合、Registration.htmlに遷移してデータを表示する
+                    const data = doc.data();
+                    // ドキュメントIDとデータをRegistration.htmlに渡して表示する処理を追加する
+                    redirectToRegistrationPage(docId, data);
+                } else {
+                    console.error('No such document!');
+                }
+            })
+            .catch((error) => {
+                console.error('Error getting document:', error);
+            });
+        }
+
+        // input.htmlに遷移してデータを表示する関数
+        function redirectToRegistrationPage(docId, data) {
+            // ドキュメントIDとデータをLocalStorageに保存して、Registration.htmlに遷移する
+            localStorage.setItem('selectedBingoCardId', docId);
+            localStorage.setItem('selectedBingoCardData', JSON.stringify(data));
+            location.href = './input.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBingoCards();
+        });
+    </script>
+    <style>
+        h1{
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0px #03ffb3,
+            2px 2px 0px #1ff89e,
+            3px 3px 0px #14d5dc,
+            4px 4px 0px #028a83;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .bingo-card {
+            border: 1px solid #000;
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .bingo-card:hover {
+            background-color: #70f5bd;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+    </style>
+</body>
+</html>
