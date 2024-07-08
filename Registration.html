@@ -52,21 +52,21 @@
 
         .textbox-11 { top: 53.5%; left: 13.5%; }
         .textbox-12 { top: 53.5%; left: 25%;}
-        /* 中央のフリースペースはスキップ */
-        .textbox-13 { top: 53.5%; left: 48%; }
-        .textbox-14 { top: 53.5%; left: 59.5%; }
+        .textbox-13 { top: 53.5%; left: 36.5%; display: none; } /* 中央のテキストボックスを非表示にする */
+        .textbox-14 { top: 53.5%; left: 48%; }
+        .textbox-15 { top: 53.5%; left: 59.5%; }
 
-        .textbox-15 { top: 65%; left: 13.5%; }
-        .textbox-16 { top: 65%; left: 25%; }
-        .textbox-17 { top: 65%; left: 36.5%; }
-        .textbox-18 { top: 65%; left: 48%; }
-        .textbox-19 { top: 65%; left: 59.5%; }
+        .textbox-16 { top: 65%; left: 13.5%; }
+        .textbox-17 { top: 65%; left: 25%; }
+        .textbox-18 { top: 65%; left: 36.5%; }
+        .textbox-19 { top: 65%; left: 48%; }
+        .textbox-20 { top: 65%; left: 59.5%; }
 
-        .textbox-20 { top: 76.5%; left: 13.5%; }
-        .textbox-21 { top: 76.5%; left: 25%; }
-        .textbox-22 { top: 76.5%; left: 36.5%; }
-        .textbox-23 { top: 76.5%; left: 48%;}
-        .textbox-24 { top: 76.5%; left: 59.5%; }
+        .textbox-21 { top: 76.5%; left: 13.5%; }
+        .textbox-22 { top: 76.5%; left: 25%; }
+        .textbox-23 { top: 76.5%; left: 36.5%; }
+        .textbox-24 { top: 76.5%; left: 48%;}
+        .textbox-25 { top: 76.5%; left: 59.5%; }
 
         .button {
             position: absolute;
@@ -84,6 +84,7 @@
         }
         .buttontext { top: 76.5%; left: 75%; }
 
+        
     </style>
 </head>
 <body>
@@ -105,7 +106,6 @@
             <textarea class="square-textbox textbox-10"></textarea>
             <textarea class="square-textbox textbox-11"></textarea>
             <textarea class="square-textbox textbox-12"></textarea>
-            <!-- 中央のフリースペースは空ける -->
             <textarea class="square-textbox textbox-13"></textarea>
             <textarea class="square-textbox textbox-14"></textarea>
             <textarea class="square-textbox textbox-15"></textarea>
@@ -118,6 +118,7 @@
             <textarea class="square-textbox textbox-22"></textarea>
             <textarea class="square-textbox textbox-23"></textarea>
             <textarea class="square-textbox textbox-24"></textarea>
+            <textarea class="square-textbox textbox-25"></textarea>
 
             <input type="text" id="nameInput" placeholder="登録名入力欄">
             <button class="register-button" id="registerButton">登録</button>
@@ -133,6 +134,7 @@
         <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
     </main>
     <script>
+   
         document.querySelectorAll('.square-textbox').forEach((textbox, index, textboxes) => {
             textbox.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
@@ -140,14 +142,18 @@
                     if (textboxes[index].value.length > 2) {
                         textboxes[index].value = textboxes[index].value.slice(0, 2);
                     }
-                    const nextTextbox = textboxes[index + 1];
+                    let nextTextbox = textboxes[index + 1];
+                    if (index === 11) {
+                        nextTextbox = textboxes[index + 2];
+                    }
                     if (nextTextbox) {
                         nextTextbox.focus();
                     }
                 }
             });
-
         });
+    </script>
+
     </script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>    
