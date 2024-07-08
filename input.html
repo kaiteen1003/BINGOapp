@@ -6,11 +6,18 @@
     <title>BINGO Edit</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .main-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
         .container {
             position: relative;
             width: 500px; /* 画像の幅 */
             height: 500px; /* 画像の高さ */
-            margin: auto;
+            margin: 0 20px;
         }
 
         .container img {
@@ -67,44 +74,57 @@
         .textbox-22 { top: 76.5%; left: 36.5%; }
         .textbox-23 { top: 76.5%; left: 48%;}
         .textbox-24 { top: 76.5%; left: 59.5%; }
+
+        .form-container{
+            margin: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
     </style>
 </head>
 <body>
     <main>
-        <div class="container">
-            <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-            <textarea class="square-textbox textbox-1"></textarea>
-            <textarea class="square-textbox textbox-2"></textarea>
-            <textarea class="square-textbox textbox-3"></textarea>
-            <textarea class="square-textbox textbox-4"></textarea>
-            <textarea class="square-textbox textbox-5"></textarea>
-            <textarea class="square-textbox textbox-6"></textarea>
-            <textarea class="square-textbox textbox-7"></textarea>
-            <textarea class="square-textbox textbox-8"></textarea>
-            <textarea class="square-textbox textbox-9"></textarea>
-            <textarea class="square-textbox textbox-10"></textarea>
-            <textarea class="square-textbox textbox-11"></textarea>
-            <textarea class="square-textbox textbox-12"></textarea>
-            <!-- 中央のフリースペースは空ける -->
-            <textarea class="square-textbox textbox-13"></textarea>
-            <textarea class="square-textbox textbox-14"></textarea>
-            <textarea class="square-textbox textbox-15"></textarea>
-            <textarea class="square-textbox textbox-16"></textarea>
-            <textarea class="square-textbox textbox-17"></textarea>
-            <textarea class="square-textbox textbox-18"></textarea>
-            <textarea class="square-textbox textbox-19"></textarea>
-            <textarea class="square-textbox textbox-20"></textarea>
-            <textarea class="square-textbox textbox-21"></textarea>
-            <textarea class="square-textbox textbox-22"></textarea>
-            <textarea class="square-textbox textbox-23"></textarea>
-            <textarea class="square-textbox textbox-24"></textarea>
-            <button class="register-button" id="registerButton">更新</button>
+        <div class="main-container">
+            <div class="form-container">
+                <form onsubmit="return handleFormSubmit(event)">
+                    <input type="number" id="numeric" name="numeric" min="1" max="75" />
+                    <button type="submit">入力</button>
+                    <p id="arrayOutput"></p>
+                </form>
+                <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+                <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
+            </div>
+            <div class="container">
+                <img src="picture/BINGOcard.JPG" alt="BINGO Card">
+                <textarea class="square-textbox textbox-1"></textarea>
+                <textarea class="square-textbox textbox-2"></textarea>
+                <textarea class="square-textbox textbox-3"></textarea>
+                <textarea class="square-textbox textbox-4"></textarea>
+                <textarea class="square-textbox textbox-5"></textarea>
+                <textarea class="square-textbox textbox-6"></textarea>
+                <textarea class="square-textbox textbox-7"></textarea>
+                <textarea class="square-textbox textbox-8"></textarea>
+                <textarea class="square-textbox textbox-9"></textarea>
+                <textarea class="square-textbox textbox-10"></textarea>
+                <textarea class="square-textbox textbox-11"></textarea>
+                <textarea class="square-textbox textbox-12"></textarea>
+                <!-- 中央のフリースペースは空ける -->
+                <textarea class="square-textbox textbox-14"></textarea>
+                <textarea class="square-textbox textbox-15"></textarea>
+                <textarea class="square-textbox textbox-16"></textarea>
+                <textarea class="square-textbox textbox-17"></textarea>
+                <textarea class="square-textbox textbox-18"></textarea>
+                <textarea class="square-textbox textbox-19"></textarea>
+                <textarea class="square-textbox textbox-20"></textarea>
+                <textarea class="square-textbox textbox-21"></textarea>
+                <textarea class="square-textbox textbox-22"></textarea>
+                <textarea class="square-textbox textbox-23"></textarea>
+                <textarea class="square-textbox textbox-24"></textarea>
+                <textarea class="square-textbox textbox-25"></textarea>
+            </div>
         </div>
-        <form onsubmit="return handleFormSubmit(event)">
-            <input type="number" id="numeric" name="numeric" min="1" max="75" />
-            <button type="submit">入力</button>
-            <p id="arrayOutput"></p>
-        </form>
+        
     </main>
     <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
     <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
