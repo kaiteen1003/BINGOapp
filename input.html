@@ -2,39 +2,196 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <!-- 画面の文字エンコードを指定 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- ビューポートの設定でレスポンシブデザインに対応 -->
-    <title>BINGO app</title>
-    <!-- ページのタイトルを指定 -->
+    <title>BINGO Edit</title>
     <link rel="stylesheet" href="style.css">
-    <!-- 外部スタイルシートのリンク -->
+    <style>
+        .main-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            position: relative;
+            width: 500px; /* 画像の幅 */
+            height: 500px; /* 画像の高さ */
+            margin: 0 20px;
+        }
+
+        .container img {
+            display: block;
+            width: 80%;
+            height: 100%;
+        }
+
+        .square-textbox {
+            position: absolute;
+            width: 10%; /* 画像サイズに応じた幅 */
+            height: 10%; /* 画像サイズに応じた高さ */
+            resize: none;
+            box-sizing: border-box;
+            font-size: 50px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 1px solid #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden; /* 改行を防ぐ */
+            white-space: nowrap; /* 改行を防ぐ */
+            line-height: 1; /* 行の高さを調整して改行を防ぐ */
+        }
+
+        /* テキストボックスの配置 */
+        .textbox-1 { top: 30.5%; left: 13.5%; }
+        .textbox-2 { top: 30.5%; left: 25%; }
+        .textbox-3 { top: 30.5%; left: 36.5%; }
+        .textbox-4 { top: 30.5%; left: 48%; }
+        .textbox-5 { top: 30.5%; left: 59.5%; }
+
+        .textbox-6 { top: 42%; left: 13.5%; }
+        .textbox-7 { top: 42%; left: 25%;}
+        .textbox-8 { top: 42%; left: 36.5%; }
+        .textbox-9 { top: 42%; left: 48%; }
+        .textbox-10 { top: 42%; left: 59.5%; }
+
+        .textbox-11 { top: 53.5%; left: 13.5%; }
+        .textbox-12 { top: 53.5%; left: 25%;}
+        .textbox-13 { top: 53.5%; left: 36.5%; display: none; } /* 中央のテキストボックスを非表示にする */
+        .textbox-14 { top: 53.5%; left: 48%; }
+        .textbox-15 { top: 53.5%; left: 59.5%; }
+
+        .textbox-16 { top: 65%; left: 13.5%; }
+        .textbox-17 { top: 65%; left: 25%; }
+        .textbox-18 { top: 65%; left: 36.5%; }
+        .textbox-19 { top: 65%; left: 48%; }
+        .textbox-20 { top: 65%; left: 59.5%; }
+
+        .textbox-21 { top: 76.5%; left: 13.5%; }
+        .textbox-22 { top: 76.5%; left: 25%; }
+        .textbox-23 { top: 76.5%; left: 36.5%; }
+        .textbox-24 { top: 76.5%; left: 48%;}
+        .textbox-25 { top: 76.5%; left: 59.5%; }
+
+        .form-container{
+            margin: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+    </style>
 </head>
 <body>
     <main>
-        <!-- メインコンテンツを包むための要素 -->
-        <div class="container">
-            <!-- コンテンツを包むためのコンテナ -->
-            <h1>input</h1>
-            <!-- ページのヘッダーとしてのタイトル -->
-            <h2>穴をあけるBINGOの番号を入力してください。</h2>
-            <!-- サブタイトルや指示文 -->
-            <form>
-                <!-- 入力フォームの開始 -->
-                <input type="number" id="numeric" name="numeric" min="1" max="100" />
-                <!-- 数字を入力するためのフィールド、1から100までの範囲指定 -->
-                <button type="submit" onclick="displayNumber()">入力</button>
-                <!-- 入力ボタン、クリック時にdisplayNumber関数を実行 -->
-            </form>  
-            <script>
-                function displayNumber() {
-                    var numeric = document.getElementById("numeric").value;
-                    alert(numeric + 'が入力されました。');
-                    // 入力された数値を取得し、アラートで表示
-                }
-            </script>
+        <div class="main-container">
+            <div class="form-container">
+                <form onsubmit="return handleFormSubmit(event)">
+                    <input type="number" id="numeric" name="numeric" min="1" max="75" />
+                    <button type="submit">入力</button>
+                    <p id="arrayOutput"></p>
+                </form>
+                <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+                <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
+            </div>
+            <div class="container">
+                <img src="picture/BINGOcard.JPG" alt="BINGO Card">
+                <textarea class="square-textbox textbox-1"></textarea>
+                <textarea class="square-textbox textbox-2"></textarea>
+                <textarea class="square-textbox textbox-3"></textarea>
+                <textarea class="square-textbox textbox-4"></textarea>
+                <textarea class="square-textbox textbox-5"></textarea>
+                <textarea class="square-textbox textbox-6"></textarea>
+                <textarea class="square-textbox textbox-7"></textarea>
+                <textarea class="square-textbox textbox-8"></textarea>
+                <textarea class="square-textbox textbox-9"></textarea>
+                <textarea class="square-textbox textbox-10"></textarea>
+                <textarea class="square-textbox textbox-11"></textarea>
+                <textarea class="square-textbox textbox-12"></textarea>
+                <!-- 中央のフリースペースは空ける -->
+                <textarea class="square-textbox textbox-14"></textarea>
+                <textarea class="square-textbox textbox-15"></textarea>
+                <textarea class="square-textbox textbox-16"></textarea>
+                <textarea class="square-textbox textbox-17"></textarea>
+                <textarea class="square-textbox textbox-18"></textarea>
+                <textarea class="square-textbox textbox-19"></textarea>
+                <textarea class="square-textbox textbox-20"></textarea>
+                <textarea class="square-textbox textbox-21"></textarea>
+                <textarea class="square-textbox textbox-22"></textarea>
+                <textarea class="square-textbox textbox-23"></textarea>
+                <textarea class="square-textbox textbox-24"></textarea>
+                <textarea class="square-textbox textbox-25"></textarea>
+            </div>
         </div>
-        <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+        
     </main>
+    <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+    <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
+
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+    <script>
+        firebase.initializeApp({
+            apiKey: "AIzaSyBFglLx2pDfHSpyEUUpn0c939BWS1vmzQg",
+            projectId: "bingoapp-8c5c0",
+        });
+
+        const db = firebase.firestore();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const docId = localStorage.getItem('selectedBingoCardId');
+            const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
+
+            if (docId && data) {
+                const textboxes = document.querySelectorAll('.square-textbox');
+                textboxes.forEach((textbox, index) => {
+                    textbox.value = data.values[index] || '';
+                });
+            } else {
+                console.log('No document ID or data found in localStorage.');
+            }
+
+            document.querySelector('#registerButton').addEventListener('click', function() {
+                const textboxes = document.querySelectorAll('.square-textbox');
+                let values = [];
+                textboxes.forEach(textbox => {
+                    values.push(textbox.value);
+                });
+
+                db.collection('BINGOApp').doc(docId).update({
+                    values: values,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                })
+                .then(function() {
+                    console.log('Document updated successfully.');
+                    alert(docId + 'の更新が完了しました。');
+                })
+                .catch(function(error) {
+                    console.error('Error updating document:', error);
+                    alert('更新に失敗しました: ' + error.message);
+                });
+            });
+
+            if (localStorage.getItem('numbersArray')) {
+                numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
+                document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
+            }
+        });
+
+        let numbersArray = [];
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            var numeric = document.getElementById("numeric").value;
+            if (numeric !== "") {
+                numbersArray.push(Number(numeric));
+                localStorage.setItem('numbersArray', JSON.stringify(numbersArray));
+                document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
+                document.getElementById('numeric').value = '';
+            }
+            return true;
+        }
+    </script>
 </body>
 </html>
