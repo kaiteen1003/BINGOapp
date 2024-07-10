@@ -120,7 +120,22 @@
             <textarea class="square-textbox textbox-24"></textarea>
             <textarea class="square-textbox textbox-25"></textarea>
 
-            <input type="text" id="nameInput" placeholder="登録名入力欄">
+            <head>
+                <title>登録名入力欄</title>
+                <style>
+                    #nameInput {
+                        width: 300px;  /* 幅を300ピクセルに設定 */
+                        height: 40px;  /* 高さを40ピクセルに設定 */
+                        font-size: 25px;  /* フォントサイズを24ピクセルに設定 */
+                        border: 2px solid #000;  /* 黒の2ピクセルのボーダーを設定 */
+                        padding: 5px;     /* 内側の余白を5ピクセルに設定 */
+                    }
+                </style>
+            </head>
+            <body>
+                <input type="text" id="nameInput" placeholder="登録名入力欄">
+            </body>
+
             <button class="register-button" id="registerButton">登録</button>
         </div>
         <script>

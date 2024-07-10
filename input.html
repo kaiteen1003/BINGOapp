@@ -88,7 +88,21 @@
         <div class="main-container">
             <div class="form-container">
                 <form onsubmit="return handleFormSubmit(event)">
-                    <input type="number" id="numeric" name="numeric" min="1" max="75" />
+                        <head>
+                            <title>数値入力欄</title>
+                            <style>
+                                 #numeric {
+                                    width: 300px;      /* 幅を300ピクセルに設定 */
+                                    height: 50px;      /* 高さを50ピクセルに設定 */
+                                    font-size: 24px;   /* フォントサイズを24ピクセルに設定 */
+                                    padding: 10px;     /* 内側の余白を10ピクセルに設定 */
+                                    border: 2px solid #000;  /* 黒の2ピクセルのボーダーを設定 */
+                                }
+                            </style>
+                        </head>
+                        <body>
+                             <input type="number" id="numeric" name="numeric" min="1" max="75" placeholder="数値を入力してください">
+                        </body>
                     <button type="submit">入力</button>
                     <p id="arrayOutput"></p>
                 </form>
