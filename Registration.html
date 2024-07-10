@@ -25,7 +25,7 @@
             height: 10%; /* 画像サイズに応じた高さ */
             resize: none;
             box-sizing: border-box;
-            font-size: 50px;
+            font-size: 36px;
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #000;
             display: flex;
@@ -100,33 +100,35 @@
         <div class="container">
             <button class="arrow-button" id="leftArrow" onclick="moveLeft()">←</button>
             <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-            <textarea class="square-textbox textbox-1"></textarea>
-            <textarea class="square-textbox textbox-2"></textarea>
-            <textarea class="square-textbox textbox-3"></textarea>
-            <textarea class="square-textbox textbox-4"></textarea>
-            <textarea class="square-textbox textbox-5"></textarea>
-            <textarea class="square-textbox textbox-6"></textarea>
-            <textarea class="square-textbox textbox-7"></textarea>
-            <textarea class="square-textbox textbox-8"></textarea>
-            <textarea class="square-textbox textbox-9"></textarea>
-            <textarea class="square-textbox textbox-10"></textarea>
-            <textarea class="square-textbox textbox-11"></textarea>
-            <textarea class="square-textbox textbox-12"></textarea>
-            <textarea class="square-textbox textbox-13"></textarea>
-            <textarea class="square-textbox textbox-14"></textarea>
-            <textarea class="square-textbox textbox-15"></textarea>
-            <textarea class="square-textbox textbox-16"></textarea>
-            <textarea class="square-textbox textbox-17"></textarea>
-            <textarea class="square-textbox textbox-18"></textarea>
-            <textarea class="square-textbox textbox-19"></textarea>
-            <textarea class="square-textbox textbox-20"></textarea>
-            <textarea class="square-textbox textbox-21"></textarea>
-            <textarea class="square-textbox textbox-22"></textarea>
-            <textarea class="square-textbox textbox-23"></textarea>
-            <textarea class="square-textbox textbox-24"></textarea>
-            <textarea class="square-textbox textbox-25"></textarea>
+
+            <input class="square-textbox textbox-1" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-2" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-3" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-4" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-5" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-6" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-7" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-8" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-9" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-10" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-11" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-12" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-13" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-14" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-15" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-16" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-17" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-18" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-19" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-20" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-21" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-22" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-23" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-24" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-25" type="number" id="numeric"></input>
             <button id="plusButton" class="arrow-button" onclick="addNewCard()">＋</button>
             <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
+
         </div>
         <input type="text" id="nameInput" placeholder="登録名入力欄">
         
