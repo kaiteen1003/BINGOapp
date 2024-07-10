@@ -142,12 +142,19 @@
         document.addEventListener('DOMContentLoaded', function() {
             const docId = localStorage.getItem('selectedBingoCardId');
             const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
+            var numdata=new Array(25);
 
             if (docId && data) {
                 const textboxes = document.querySelectorAll('.square-textbox');
                 textboxes.forEach((textbox, index) => {
-                    textbox.value = data.values[index] || '';
-                });
+                textbox.value = data.values[index] || '';
+                }); 
+                alert(textboxes[0]);
+            
+                numdata=textboxes;
+                for(let x=0; x<3; x++){
+                        alert('このデータは' +numdata[x]+ 'です。');
+                    } 
             } else {
                 console.log('No document ID or data found in localStorage.');
             }
@@ -191,8 +198,9 @@
                 document.getElementById('numeric').value = '';
             }
             for(let x=0; x<25; x++){
-                if(data.values[x] == numeric){
-                data.values[x] = 0;
+                if(numdata[x] == numeric){
+                numdata[x] = 0;
+                alert(numdata[x] + 'に穴をあけました。');
                 }
             } 
             return true;
