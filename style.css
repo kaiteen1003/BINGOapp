@@ -1,10 +1,76 @@
-body {
+body.Title {
     display: flex; /* Flexboxレイアウトを使用 */
     justify-content: center; /* 水平方向に中央寄せ */
     align-items: center; /* 垂直方向に中央寄せ */
     height: 100vh; /* ビューポートの高さを100% */
     margin: 0; /* マージンをゼロに設定 */
     background-image: url("./picture/background1.png"); /* 背景画像を設定 */
+    background-size: cover; /* 背景画像を全体にフィット */
+    background-position: center; /* 背景画像を中央に配置 */
+    font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
+}
+body.Home {
+    display: flex; /* Flexboxレイアウトを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ */
+    height: 100vh; /* ビューポートの高さを100% */
+    margin: 0; /* マージンをゼロに設定 */
+    background-image: url("./picture/background1.png"); /* 背景画像を設定 */
+    background-size: cover; /* 背景画像を全体にフィット */
+    background-position: center; /* 背景画像を中央に配置 */
+    font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
+}
+body.input {
+    display: flex; /* Flexboxレイアウトを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ */
+    height: 100vh; /* ビューポートの高さを100% */
+    margin: 0; /* マージンをゼロに設定 */
+    background-image: url("./picture/background2.png"); /* 背景画像を設定 */
+    background-size: cover; /* 背景画像を全体にフィット */
+    background-position: center; /* 背景画像を中央に配置 */
+    font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
+}
+body.Registration {
+    display: flex; /* Flexboxレイアウトを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ */
+    height: 100vh; /* ビューポートの高さを100% */
+    margin: 0; /* マージンをゼロに設定 */
+    background-image: url("./picture/background3.png"); /* 背景画像を設定 */
+    background-size: cover; /* 背景画像を全体にフィット */
+    background-position: center; /* 背景画像を中央に配置 */
+    font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
+}
+body.Check {
+    display: flex; /* Flexboxレイアウトを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ */
+    height: 100vh; /* ビューポートの高さを100% */
+    margin: 0; /* マージンをゼロに設定 */
+    background-image: url("./picture/background4.png"); /* 背景画像を設定 */
+    background-size: cover; /* 背景画像を全体にフィット */
+    background-position: center; /* 背景画像を中央に配置 */
+    font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
+}
+body.Edit {
+    display: flex; /* Flexboxレイアウトを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ */
+    height: 100vh; /* ビューポートの高さを100% */
+    margin: 0; /* マージンをゼロに設定 */
+    background-image: url("./picture/background4.png"); /* 背景画像を設定 */
+    background-size: cover; /* 背景画像を全体にフィット */
+    background-position: center; /* 背景画像を中央に配置 */
+    font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
+}
+body.Select {
+    display: flex; /* Flexboxレイアウトを使用 */
+    justify-content: center; /* 水平方向に中央寄せ */
+    align-items: center; /* 垂直方向に中央寄せ */
+    height: 100vh; /* ビューポートの高さを100% */
+    margin: 0; /* マージンをゼロに設定 */
+    background-image: url("./picture/background2.png"); /* 背景画像を設定 */
     background-size: cover; /* 背景画像を全体にフィット */
     background-position: center; /* 背景画像を中央に配置 */
     font-family: 'Arial', sans-serif; /* フォントファミリーを指定 */
@@ -118,6 +184,27 @@ button:hover {
 }
 
 .home-button:hover {
+    background-color: #0056b3; /* ホバー時の背景色設定 */
+    transform: scale(1.05); /* ホバー時の拡大設定 */
+}
+
+.card-button {
+    position: fixed; /* 画面固定位置に配置 */
+    top: 120px; /* 位置調整 */
+    right: 20px;
+    font-size: 1rem; /* フォントサイズ設定 */
+    padding: 10px 20px; 
+    cursor: pointer; /* ポインター形状設定 */
+    background-color: #ffffff; 
+    color: rgb(27, 3, 241);
+    border: none;
+    border-radius: 5px; /* 角丸設定 */
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.3s ease; /* トランジション効果設定 */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ボックスシャドウ設定 */
+    z-index: 1; /* ボタンを他の要素の上に配置 */
+}
+
+.card-button:hover {
     background-color: #0056b3; /* ホバー時の背景色設定 */
     transform: scale(1.05); /* ホバー時の拡大設定 */
 }
