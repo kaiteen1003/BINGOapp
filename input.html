@@ -97,13 +97,16 @@
                                     font-size: 24px;   /* フォントサイズを24ピクセルに設定 */
                                     padding: 10px;     /* 内側の余白を10ピクセルに設定 */
                                     border: 2px solid #000;  /* 黒の2ピクセルのボーダーを設定 */
-                                }
+                                    position: absolute;
+                                    bottom: 90px;  /* 下から50ピクセルの位置に配置 */
+                                    right: 600px;  /* 右から50ピクセルの位置に配置 */
+                                    z-index: 1;
+                                 }
                             </style>
                         </head>
-                        <body>
                              <input type="number" id="numeric" name="numeric" min="1" max="75" placeholder="数値を入力してください">
-                        </body>
-                    <button type="submit">入力</button>
+                        </input>
+                    
                     <p id="arrayOutput"></p>
                 </form>
                 <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
@@ -136,6 +139,17 @@
                 <textarea class="square-textbox textbox-23"></textarea>
                 <textarea class="square-textbox textbox-24"></textarea>
                 <textarea class="square-textbox textbox-25"></textarea>
+            </div>
+            <style>
+                #inputbutton{
+                    position: absolute;
+                    bottom: 90px;  /* 下から50ピクセルの位置に配置 */
+                    right: 500px;  /* 右から50ピクセルの位置に配置 */
+                    z-index: 1; 
+                }
+            </style>
+            <div>
+                <button type="submit" id="inputbutton">入力</button>
             </div>
         </div>
         
