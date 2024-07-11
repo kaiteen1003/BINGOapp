@@ -6,26 +6,33 @@
     <title>BINGO app</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
         .container {
             position: relative;
-            width: 500px; /* 画像の幅 */
+            width: 1000px; /* 画像の幅 */
             height: 500px; /* 画像の高さ */
-            margin: auto;
+            margin: 0 20px;
         }
 
         .container img {
             display: block;
-            width: 80%;
-            height: 100%;
+            width: 400px;
+            height: 500px;
         }
 
         .square-textbox {
             position: absolute;
-            width: 10%; /* 画像サイズに応じた幅 */
-            height: 10%; /* 画像サイズに応じた高さ */
+            width: 55px; /* 画像サイズに応じた幅 */
+            height: 55px; /* 画像サイズに応じた高さ */
             resize: none;
             box-sizing: border-box;
-            font-size: 50px;
+            font-size: 36px;
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #000;
             display: flex;
@@ -37,104 +44,82 @@
             line-height: 1; /* 行の高さを調整して改行を防ぐ */
         }
 
-        /* テキストボックスの配置 */
-        .textbox-1 { top: 30.5%; left: 13.5%; }
-        .textbox-2 { top: 30.5%; left: 25%; }
-        .textbox-3 { top: 30.5%; left: 36.5%; }
-        .textbox-4 { top: 30.5%; left: 48%; }
-        .textbox-5 { top: 30.5%; left: 59.5%; }
-
-        .textbox-6 { top: 42%; left: 13.5%; }
-        .textbox-7 { top: 42%; left: 25%;}
-        .textbox-8 { top: 42%; left: 36.5%; }
-        .textbox-9 { top: 42%; left: 48%; }
-        .textbox-10 { top: 42%; left: 59.5%; }
-
-        .textbox-11 { top: 53.5%; left: 13.5%; }
-        .textbox-12 { top: 53.5%; left: 25%;}
-        .textbox-13 { top: 53.5%; left: 36.5%; display: none; } /* 中央のテキストボックスを非表示にする */
-        .textbox-14 { top: 53.5%; left: 48%; }
-        .textbox-15 { top: 53.5%; left: 59.5%; }
-
-        .textbox-16 { top: 65%; left: 13.5%; }
-        .textbox-17 { top: 65%; left: 25%; }
-        .textbox-18 { top: 65%; left: 36.5%; }
-        .textbox-19 { top: 65%; left: 48%; }
-        .textbox-20 { top: 65%; left: 59.5%; }
-
-        .textbox-21 { top: 76.5%; left: 13.5%; }
-        .textbox-22 { top: 76.5%; left: 25%; }
-        .textbox-23 { top: 76.5%; left: 36.5%; }
-        .textbox-24 { top: 76.5%; left: 48%;}
-        .textbox-25 { top: 76.5%; left: 59.5%; }
-
-        .button {
+        .arrow-button {
+            font-size: 20px;
+            background-color: rgb(200, 200, 200);
+            border: 1px solid #000;
+            cursor: pointer;
             position: absolute;
-            width: 20%; /* 画像サイズに応じた幅 */
-            height: 10%; /* 画像サイズに応じた高さ */
-            resize: none;
-            box-sizing: border-box;
-            font-size: 30px;
-            background-color: rgb(249, 162, 119);
-            border: 1px solid #ffffff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+            top: 50%;
+            transform: translateY(-50%);
         }
-        .buttontext { top: 76.5%; left: 75%; }
 
-        
+        #leftArrow {
+            left: 0;
+        }
+
+        #rightArrow {
+            left: 400px;
+        }
+
+        #plusButton {
+            left: 500px;
+        }
+
+        .visible {
+            display: block !important; /* 重要度を強調して表示 */
+        }
     </style>
 </head>
-<body>
+<body class="Registration">
     <main>
-
-        
-        <div class="container">
-            
-            <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-            <textarea class="square-textbox textbox-1"></textarea>
-            <textarea class="square-textbox textbox-2"></textarea>
-            <textarea class="square-textbox textbox-3"></textarea>
-            <textarea class="square-textbox textbox-4"></textarea>
-            <textarea class="square-textbox textbox-5"></textarea>
-            <textarea class="square-textbox textbox-6"></textarea>
-            <textarea class="square-textbox textbox-7"></textarea>
-            <textarea class="square-textbox textbox-8"></textarea>
-            <textarea class="square-textbox textbox-9"></textarea>
-            <textarea class="square-textbox textbox-10"></textarea>
-            <textarea class="square-textbox textbox-11"></textarea>
-            <textarea class="square-textbox textbox-12"></textarea>
-            <textarea class="square-textbox textbox-13"></textarea>
-            <textarea class="square-textbox textbox-14"></textarea>
-            <textarea class="square-textbox textbox-15"></textarea>
-            <textarea class="square-textbox textbox-16"></textarea>
-            <textarea class="square-textbox textbox-17"></textarea>
-            <textarea class="square-textbox textbox-18"></textarea>
-            <textarea class="square-textbox textbox-19"></textarea>
-            <textarea class="square-textbox textbox-20"></textarea>
-            <textarea class="square-textbox textbox-21"></textarea>
-            <textarea class="square-textbox textbox-22"></textarea>
-            <textarea class="square-textbox textbox-23"></textarea>
-            <textarea class="square-textbox textbox-24"></textarea>
-            <textarea class="square-textbox textbox-25"></textarea>
-
-            <input type="text" id="nameInput" placeholder="登録名入力欄">
-            <button class="register-button" id="registerButton">登録</button>
+        <div class="main-container">
+            <div class="form-container">
+                <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+                <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
+                <button class="card-button" onclick="location.href='./Select.html'">カード選択に戻る</button>
+            </div>
+            <div class="container">
+                <button class="arrow-button" id="leftArrow" onclick="moveLeft()">←</button>
+                <img src="picture/BINGOcard.JPG" alt="BINGO Card">
+                <input class="square-textbox textbox-1" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-2" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-3" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-4" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-5" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-6" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-7" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-8" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-9" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-10" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-11" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-12" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-13" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-14" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-15" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-16" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-17" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-18" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-19" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-20" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-21" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-22" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-23" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-24" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-25" type="number" id="numeric"></input>
+                <button id="plusButton" class="arrow-button" onclick="addNewCard()">+</button>
+                <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
+                <form class="input-form" onsubmit="handleFormSubmit(event)">
+                    <input type="text" id="nameInput" placeholder="登録名入力欄">
+                    <button type="submit" class="register-button">登録</button>
+                </form>
+            </div>
         </div>
-        <script>
-            function displayNumber() {
-                var numeric = document.getElementById("numeric").value;
-                alert(numeric + 'が入力されました。');
-                // 入力された数値を取得し、アラートで表示
-            }
-        </script>
-        <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
-        <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
     </main>
     <script>
-   
+        const cards = [];
+        let cardIndex = 0;
+
         document.querySelectorAll('.square-textbox').forEach((textbox, index, textboxes) => {
             textbox.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
@@ -152,11 +137,110 @@
                 }
             });
         });
-    </script>
 
+        function saveCurrentCard() {
+            const textboxes = document.querySelectorAll('.square-textbox');
+            const values = [];
+            textboxes.forEach(textbox => {
+                values.push(textbox.value);
+            });
+            cards[cardIndex] = values;
+        }
+
+        function loadCard(index) {
+            const values = cards[index];
+            const textboxes = document.querySelectorAll('.square-textbox');
+            textboxes.forEach((textbox, i) => {
+                textbox.value = values[i];
+            });
+        }
+
+        function clearTextboxes() {
+            const textboxes = document.querySelectorAll('.square-textbox');
+            textboxes.forEach(textbox => {
+                textbox.value = '';
+            });
+        }
+
+        function moveRight() {
+            saveCurrentCard();
+            cardIndex++;
+            if (cards[cardIndex]) {
+                loadCard(cardIndex);
+                document.querySelector('#leftArrow').classList.add('visible');
+                if (cardIndex === cards.length - 1) {
+                    document.querySelector('#rightArrow').classList.remove('visible');
+                    document.querySelector('#plusButton').classList.add('visible');
+                } else {
+                    document.querySelector('#rightArrow').classList.add('visible');
+                    document.querySelector('#plusButton').classList.remove('visible');
+                }
+            } else {
+                alert('これ以上進めません。');
+                cardIndex--;
+            }
+            updateCardIndexLabel();
+        }
+
+        function moveLeft() {
+            saveCurrentCard();
+            if (cardIndex > 0) {
+                cardIndex--;
+                loadCard(cardIndex);
+                document.querySelector('#rightArrow').classList.add('visible');
+                if (cardIndex === 0) {
+                    document.querySelector('#leftArrow').classList.remove('visible');
+                }
+                document.querySelector('#plusButton').classList.remove('visible');
+            } else {
+                alert('これ以上戻れません。');
+            }
+            updateCardIndexLabel();
+        }
+
+        function addNewCard() {
+            saveCurrentCard();
+            cardIndex = cards.length;
+            clearTextboxes();
+            document.querySelector('#leftArrow').classList.add('visible');
+            if (cards.length > 0) {
+                document.querySelector('#rightArrow').classList.add('visible');
+            } else {
+                document.querySelector('#rightArrow').classList.remove('visible');
+            }
+            document.querySelector('#plusButton').classList.remove('visible');
+            updateCardIndexLabel();
+        }
+
+        function updateCardIndexLabel() {
+            const cardIndexLabel = document.getElementById('cardIndexLabel');
+            cardIndexLabel.textContent = `${cardIndex + 1}枚目 / ${cards.length}枚`;
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            saveCurrentCard();
+            const name = document.getElementById('nameInput').value;
+            const cardData = {};
+            cards.forEach((card, index) => {
+                cardData[`values${index + 1}`] = card;
+            });
+            db.collection('BINGOApp').doc(name).set({
+                ...cardData,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            })
+            .then(function() {
+                console.log('ドキュメントが正常に書き込まれました！');
+                alert('Name: ' + name + ' BINGOカードが正常に保存されました。');
+            })
+            .catch(function(error) {
+                console.error('ドキュメントの書き込みエラー: ', error);
+                alert('保存中にエラーが発生しました。');
+            });
+        }
     </script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>    
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
     <script>
         firebase.initializeApp({
             apiKey: "AIzaSyBFglLx2pDfHSpyEUUpn0c939BWS1vmzQg",
@@ -164,32 +248,6 @@
         });
 
         const db = firebase.firestore();
-
-        document.querySelector('#registerButton').addEventListener('click', function() {
-    const textboxes = document.querySelectorAll('.square-textbox');
-    let values = [];
-    textboxes.forEach(textbox => {
-        values.push(textbox.value);
-    });
-
-    // 名前入力フィールドから名前を取得
-    const name = document.getElementById('nameInput').value;
-
-    // 名前をFirestoreのドキュメントIDとして使用して保存
-    db.collection('BINGOApp').doc(name).set({
-        values: values,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp()
-    })
-    .then(function() {
-        console.log('ドキュメントが正常に書き込まれました！');
-        alert('Name: '+name+'BINGOカードが正常に保存されました。');
-    })
-    .catch(function(error) {
-        console.error('ドキュメントの書き込みエラー：', error);
-        alert('データの保存に失敗しました：' + error.message);
-    });
-});
-
     </script>
 </body>
 </html>
