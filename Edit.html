@@ -6,12 +6,24 @@
     <title>BINGO Edit</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .main-container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
+        .container {
+            position: relative;
+            width: 1000px; /* 画像の幅 */
+            height: 500px; /* 画像の高さ */
+            margin: 0 20px;
+        }
 
         .container img {
             display: block;
-            width: 80%;
-            height: 100%;
+            width: 400px;
+            height: 500px;
         }
 
         .square-textbox {
@@ -58,7 +70,31 @@
         top:300px
         }
 
-        /* テキストボックスの配置 */
+        .input-number {
+            width: 200px; /* Adjust width as needed */
+            padding: 5px;
+            margin-bottom: 10px; /* Adjust spacing between inputs */
+            font-size: 16px; /* Adjust font size */
+    
+        
+        }
+
+        .input-submit {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px; /* Adjust font size */
+        }
+
+        .input-output {
+            margin-top: 10px; /* Adjust margin as needed */
+            font-size: 14px; /* Adjust font size */
+        }
+
+        /* テキストボックスの配置（画像のピクセル座標で指定） */
+
         
         .textbox-1 { top:  177.5px;  left: 77.5px; } /* 画像の高さの30.5% + 20px、幅の13.5% + 10px */
         .textbox-2 { top: 177.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの30.5% + 20px、幅の25% + 10px */
@@ -88,98 +124,64 @@
         .textbox-23 { top: 445.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの76.5% + 20px、幅の36.5% + 10px */
         .textbox-24 { top: 445.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの76.5% + 20px、幅の48% + 10px */
         .textbox-25 { top: 445.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの76.5% + 20px、幅の59.5% + 10px */
-
-        .arrow-button {
-            font-size: 20px;
-            background-color: rgb(200, 200, 200);
-            border: 1px solid #000;
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
+        .form-container{
+            margin: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
         }
-
-        #leftArrow {
-            left: 0;
-            display: none; /* 初期表示は非表示 */
-        }
-
-        #rightArrow {
-            right: 0;
-            display: none; /* 初期表示は非表示 */
-        }
-     
-
-        .visible {
-            display: block !important; /* 重要度を強調して表示 */
-        }
-
     </style>
-    <button class="back-button" onclick="location.href='./Check.html'">カード一覧に戻る</button>
 </head>
-<body class="Edit">
+<body class="input">
     <main>
-        
-        <div class="container">
-            <button class="arrow-button" id="leftArrow" onclick="moveLeft()">←</button>
-            <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-
-            <input class="square-textbox textbox-1" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-2" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-3" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-4" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-5" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-6" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-7" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-8" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-9" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-10" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-11" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-12" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-13" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-14" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-15" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-16" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-17" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-18" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-19" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-20" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-21" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-22" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-23" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-24" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-25" type="number" id="numeric"></input>
-            <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
+        <div class="main-container">
+            <div class="form-container">
+                <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+                <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
+                <button class="card-button" onclick="location.href='./Select.html'">カード選択に戻る</button>
+            </div>
+            <div class="container">
+                <button class="arrow-button" id="leftArrow" onclick="moveLeft()">←</button>
+                <img src="picture/BINGOcard.JPG" alt="BINGO Card">
+                <input class="square-textbox textbox-1" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-2" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-3" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-4" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-5" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-6" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-7" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-8" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-9" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-10" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-11" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-12" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-13" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-14" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-15" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-16" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-17" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-18" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-19" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-20" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-21" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-22" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-23" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-24" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-25" type="number" id="numeric"></input>
+                <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
+                <form class="input-form" onsubmit="return handleFormSubmit(event)">
+                    <button class="register-button" id="registerButton">更新</button> <!-- 更新ボタンに変更 -->
+                </form>
+                
+            </div>
         </div>
-
         
-
     </main>
     <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
     <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
-    <button class="card-button" onclick="location.href='./Check.html'">カード選択に戻る</button>
-    <script>
-   
-        document.querySelectorAll('.square-textbox').forEach((textbox, index, textboxes) => {
-            textbox.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter') {
-                    e.preventDefault();
-                    if (textboxes[index].value.length > 2) {
-                        textboxes[index].value = textboxes[index].value.slice(0, 2);
-                    }
-                    let nextTextbox = textboxes[index + 1];
-                    if (index === 11) {
-                        nextTextbox = textboxes[index + 2];
-                    }
-                    if (nextTextbox) {
-                        nextTextbox.focus();
-                    }
-                }
-            });
-        });
-    </script>
+
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>    
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
     <script>
         firebase.initializeApp({
             apiKey: "AIzaSyBFglLx2pDfHSpyEUUpn0c939BWS1vmzQg",
@@ -189,46 +191,18 @@
         const db = firebase.firestore();
 
         document.addEventListener('DOMContentLoaded', function() {
-            // クラウドストレージから選択したビンゴカードのIDを取得
             const docId = localStorage.getItem('selectedBingoCardId');
+            const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
 
-            // Firestoreからデータを取得してテキストボックスに表示する
-            db.collection('BINGOApp').doc(docId).get()
-                .then(function(doc) {
-                    if (doc.exists) {
-                        const data = doc.data();
-                        const values1 = data.values1; // values1 を取得
-
-                        // テキストボックスに値をセットする
-                        const textboxes = document.querySelectorAll('.square-textbox');
-                        textboxes.forEach((textbox, index) => {
-                            textbox.value = values1[index] || ''; // values1 の値をテキストボックスにセット
-                        });
-                    } else {
-                        console.log('No such document!');
-                    }
-                })
-                .catch(function(error) {
-                    console.log('Error getting document:', error);
+            if (docId && data) {
+                const textboxes = document.querySelectorAll('.square-textbox');
+                textboxes.forEach((textbox, index) => {
+                    textbox.value = data.values[index] || '';
                 });
-            // 前のカードへの移動ボタンのクリックイベントリスナーを設定
-            document.querySelector('#prevButton').addEventListener('click', function() {
-                if (currentCardIndex > 1) {
-                    currentCardIndex--;
-                    updateCardData(currentCardIndex);
-                }
-            });
+            } else {
+                console.log('No document ID or data found in localStorage.');
+            }
 
-            // 次のカードへの移動ボタンのクリックイベントリスナーを設定
-            document.querySelector('#nextButton').addEventListener('click', function() {
-                // ここでFirestoreに存在するカードの最大数を取得し、それを使って条件分岐をしましょう。
-                const maxCards = 3; // Firestoreに保存されているカードの最大数
-                if (currentCardIndex < maxCards) {
-                    currentCardIndex++;
-                    updateCardData(currentCardIndex);
-                }
-            });
-            // 更新ボタンのクリックイベントリスナーを設定
             document.querySelector('#registerButton').addEventListener('click', function() {
                 const textboxes = document.querySelectorAll('.square-textbox');
                 let values = [];
@@ -236,21 +210,39 @@
                     values.push(textbox.value);
                 });
 
-                // Firestoreに保存
                 db.collection('BINGOApp').doc(docId).update({
-                    values1: values, // values1 を更新
+                    values: values,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 })
                 .then(function() {
                     console.log('Document updated successfully.');
-                    alert('更新が完了しました。');
+                    alert(docId + 'の更新が完了しました。');
                 })
                 .catch(function(error) {
                     console.error('Error updating document:', error);
                     alert('更新に失敗しました: ' + error.message);
                 });
             });
+
+            if (localStorage.getItem('numbersArray')) {
+                numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
+                document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
+            }
         });
+
+        let numbersArray = [];
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            var numeric = document.getElementById("numeric").value;
+            if (numeric !== "") {
+                numbersArray.push(Number(numeric));
+                localStorage.setItem('numbersArray', JSON.stringify(numbersArray));
+                document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
+                document.getElementById('numeric').value = '';
+            }
+            return true;
+        }
     </script>
 </body>
 </html>

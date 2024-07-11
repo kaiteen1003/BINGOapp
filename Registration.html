@@ -6,6 +6,13 @@
     <title>BINGO app</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        .main-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
         .container {
             position: relative;
             width: 1000px; /* 画像の幅 */
@@ -15,14 +22,14 @@
 
         .container img {
             display: block;
-            width: 80%;
-            height: 100%;
+            width: 400px;
+            height: 500px;
         }
 
         .square-textbox {
             position: absolute;
-            width: 10%; /* 画像サイズに応じた幅 */
-            height: 10%; /* 画像サイズに応じた高さ */
+            width: 55px; /* 画像サイズに応じた幅 */
+            height: 55px; /* 画像サイズに応じた高さ */
             resize: none;
             box-sizing: border-box;
             font-size: 36px;
@@ -37,37 +44,6 @@
             line-height: 1; /* 行の高さを調整して改行を防ぐ */
         }
 
-        /* テキストボックスの配置 */
-        .textbox-1 { top: 30.5%; left: 13.5%; }
-        .textbox-2 { top: 30.5%; left: 25%; }
-        .textbox-3 { top: 30.5%; left: 36.5%; }
-        .textbox-4 { top: 30.5%; left: 48%; }
-        .textbox-5 { top: 30.5%; left: 59.5%; }
-
-        .textbox-6 { top: 42%; left: 13.5%; }
-        .textbox-7 { top: 42%; left: 25%; }
-        .textbox-8 { top: 42%; left: 36.5%; }
-        .textbox-9 { top: 42%; left: 48%; }
-        .textbox-10 { top: 42%; left: 59.5%; }
-
-        .textbox-11 { top: 53.5%; left: 13.5%; }
-        .textbox-12 { top: 53.5%; left: 25%; }
-        .textbox-13 { top: 53.5%; left: 36.5%; display: none; } /* 中央のテキストボックスを非表示にする */
-        .textbox-14 { top: 53.5%; left: 48%; }
-        .textbox-15 { top: 53.5%; left: 59.5%; }
-
-        .textbox-16 { top: 65%; left: 13.5%; }
-        .textbox-17 { top: 65%; left: 25%; }
-        .textbox-18 { top: 65%; left: 36.5%; }
-        .textbox-19 { top: 65%; left: 48%; }
-        .textbox-20 { top: 65%; left: 59.5%; }
-
-        .textbox-21 { top: 76.5%; left: 13.5%; }
-        .textbox-22 { top: 76.5%; left: 25%; }
-        .textbox-23 { top: 76.5%; left: 36.5%; }
-        .textbox-24 { top: 76.5%; left: 48%; }
-        .textbox-25 { top: 76.5%; left: 59.5%; }
-
         .arrow-button {
             font-size: 20px;
             background-color: rgb(200, 200, 200);
@@ -80,61 +56,65 @@
 
         #leftArrow {
             left: 0;
-
         }
 
         #rightArrow {
-            right: 0;
-
+            left: 400px;
         }
-     
+
+        #plusButton {
+            left: 500px;
+        }
 
         .visible {
             display: block !important; /* 重要度を強調して表示 */
         }
-
     </style>
 </head>
 <body class="Registration">
     <main>
-        <div class="container">
-            <button class="arrow-button" id="leftArrow" onclick="moveLeft()">←</button>
-            <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-
-            <input class="square-textbox textbox-1" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-2" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-3" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-4" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-5" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-6" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-7" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-8" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-9" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-10" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-11" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-12" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-13" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-14" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-15" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-16" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-17" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-18" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-19" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-20" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-21" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-22" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-23" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-24" type="number" id="numeric"></input>
-            <input class="square-textbox textbox-25" type="number" id="numeric"></input>
-            <button id="plusButton" class="arrow-button" onclick="addNewCard()">＋</button>
-            <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
-
+        <div class="main-container">
+            <div class="form-container">
+                <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+                <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
+                <button class="card-button" onclick="location.href='./Select.html'">カード選択に戻る</button>
+            </div>
+            <div class="container">
+                <button class="arrow-button" id="leftArrow" onclick="moveLeft()">←</button>
+                <img src="picture/BINGOcard.JPG" alt="BINGO Card">
+                <input class="square-textbox textbox-1" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-2" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-3" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-4" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-5" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-6" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-7" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-8" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-9" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-10" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-11" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-12" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-13" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-14" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-15" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-16" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-17" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-18" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-19" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-20" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-21" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-22" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-23" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-24" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-25" type="number" id="numeric"></input>
+                <button id="plusButton" class="arrow-button" onclick="addNewCard()">+</button>
+                <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
+                <form class="input-form" onsubmit="handleFormSubmit(event)">
+                    <input type="text" id="nameInput" placeholder="登録名入力欄">
+                    <button type="submit" class="register-button">登録</button>
+                </form>
+            </div>
         </div>
-        <input type="text" id="nameInput" placeholder="登録名入力欄">
-        
-        <button class="register-button" id="registerButton">登録</button>
-        <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
-        <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
     </main>
     <script>
         const cards = [];
@@ -237,7 +217,8 @@
             cardIndexLabel.textContent = `${cardIndex + 1}枚目 / ${cards.length}枚`;
         }
 
-        document.querySelector('#registerButton').addEventListener('click', function() {
+        function handleFormSubmit(event) {
+            event.preventDefault();
             saveCurrentCard();
             const name = document.getElementById('nameInput').value;
             const cardData = {};
@@ -256,7 +237,7 @@
                 console.error('ドキュメントの書き込みエラー: ', error);
                 alert('保存中にエラーが発生しました。');
             });
-        });
+        }
     </script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
