@@ -6,12 +6,7 @@
     <title>BINGO Edit</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .container {
-            position: relative;
-            width: 500px; /* 画像の幅 */
-            height: 500px; /* 画像の高さ */
-            margin: auto;
-        }
+
 
         .container img {
             display: block;
@@ -21,11 +16,11 @@
 
         .square-textbox {
             position: absolute;
-            width: 10%; /* 画像サイズに応じた幅 */
-            height: 10%; /* 画像サイズに応じた高さ */
+            width: 55px; /* 画像サイズに応じた幅 */
+            height: 55px; /* 画像サイズに応じた高さ */
             resize: none;
             box-sizing: border-box;
-            font-size: 50px;
+            font-size: 36px;
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #000;
             display: flex;
@@ -36,37 +31,89 @@
             white-space: nowrap; /* 改行を防ぐ */
             line-height: 1; /* 行の高さを調整して改行を防ぐ */
         }
+        
+        .arrow-button {
+            font-size: 20px;
+            background-color: rgb(200, 200, 200);
+            border: 1px solid #000;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        #leftArrow {
+            left: 0;
+
+        }
+
+        #rightArrow {
+            left: 400px;
+
+        }
+        .input-form {
+            position: absolute;
+
+        margin-top: 20px; /* Adjust as needed */
+        left: 600px;
+        top:300px
+        }
 
         /* テキストボックスの配置 */
-        .textbox-1 { top: 30.5%; left: 13.5%; }
-        .textbox-2 { top: 30.5%; left: 25%; }
-        .textbox-3 { top: 30.5%; left: 36.5%; }
-        .textbox-4 { top: 30.5%; left: 48%; }
-        .textbox-5 { top: 30.5%; left: 59.5%; }
+        
+        .textbox-1 { top:  177.5px;  left: 77.5px; } /* 画像の高さの30.5% + 20px、幅の13.5% + 10px */
+        .textbox-2 { top: 177.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの30.5% + 20px、幅の25% + 10px */
+        .textbox-3 { top:  177.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの30.5% + 20px、幅の36.5% + 10px */
+        .textbox-4 { top:  177.5px;  left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの30.5% + 20px、幅の48% + 10px */
+        .textbox-5 { top:  177.5px;  left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの30.5% + 20px、幅の59.5% + 10px */
 
-        .textbox-6 { top: 42%; left: 13.5%; }
-        .textbox-7 { top: 42%; left: 25%;}
-        .textbox-8 { top: 42%; left: 36.5%; }
-        .textbox-9 { top: 42%; left: 48%; }
-        .textbox-10 { top: 42%; left: 59.5%; }
+        .textbox-6 { top: 245.5px; left: 77.5px; } /* 画像の高さの42% + 20px、幅の13.5% + 10px */
+        .textbox-7 { top: 245.5px;left: calc(77.5px + 67.5px); } /* 画像の高さの42% + 20px、幅の25% + 10px */
+        .textbox-8 { top:245.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの42% + 20px、幅の36.5% + 10px */
+        .textbox-9 { top: 245.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの42% + 20px、幅の48% + 10px */
+        .textbox-10 { top: 245.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの42% + 20px、幅の59.5% + 10px */
+        .textbox-11 { top: 313.5px; left: 77.5px; } /* 画像の高さの53.5% + 20px、幅の13.5% + 10px */
+        .textbox-12 { top: 313.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの53.5% + 20px、幅の25% + 10px */
+        .textbox-13 { top: 313.5px; left: calc(77.5px + (67.5px * 2)); display: none; } /* 中央のテキストボックスを非表示にする */
+        .textbox-14 { top: 313.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの53.5% + 20px、幅の48% + 10px */
+        .textbox-15 { top: 313.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの53.5% + 20px、幅の59.5% + 10px */
 
-        .textbox-11 { top: 53.5%; left: 13.5%; }
-        .textbox-12 { top: 53.5%; left: 25%;}
-        .textbox-13 { top: 53.5%; left: 36.5%; display: none; } /* 中央のテキストボックスを非表示にする */
-        .textbox-14 { top: 53.5%; left: 48%; }
-        .textbox-15 { top: 53.5%; left: 59.5%; }
+        .textbox-16 { top: 381.5px; left: 77.5px; } /* 画像の高さの65% + 20px、幅の13.5% + 10px */
+        .textbox-17 { top: 381.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの65% + 20px、幅の25% + 10px */
+        .textbox-18 { top: 381.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの65% + 20px、幅の36.5% + 10px */
+        .textbox-19 { top: 381.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの65% + 20px、幅の48% + 10px */
+        .textbox-20 { top: 381.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの65% + 20px、幅の59.5% + 10px */
 
-        .textbox-16 { top: 65%; left: 13.5%; }
-        .textbox-17 { top: 65%; left: 25%; }
-        .textbox-18 { top: 65%; left: 36.5%; }
-        .textbox-19 { top: 65%; left: 48%; }
-        .textbox-20 { top: 65%; left: 59.5%; }
+        .textbox-21 { top: 445.5px; left: 77.5px; } /* 画像の高さの76.5% + 20px、幅の13.5% + 10px */
+        .textbox-22 { top:445.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの76.5% + 20px、幅の25% + 10px */
+        .textbox-23 { top: 445.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの76.5% + 20px、幅の36.5% + 10px */
+        .textbox-24 { top: 445.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの76.5% + 20px、幅の48% + 10px */
+        .textbox-25 { top: 445.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの76.5% + 20px、幅の59.5% + 10px */
 
-        .textbox-21 { top: 76.5%; left: 13.5%; }
-        .textbox-22 { top: 76.5%; left: 25%; }
-        .textbox-23 { top: 76.5%; left: 36.5%; }
-        .textbox-24 { top: 76.5%; left: 48%;}
-        .textbox-25 { top: 76.5%; left: 59.5%; }
+        .arrow-button {
+            font-size: 20px;
+            background-color: rgb(200, 200, 200);
+            border: 1px solid #000;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        #leftArrow {
+            left: 0;
+            display: none; /* 初期表示は非表示 */
+        }
+
+        #rightArrow {
+            right: 0;
+            display: none; /* 初期表示は非表示 */
+        }
+     
+
+        .visible {
+            display: block !important; /* 重要度を強調して表示 */
+        }
+
     </style>
     <button class="back-button" onclick="location.href='./Check.html'">カード一覧に戻る</button>
 </head>
@@ -74,34 +121,39 @@
     <main>
         
         <div class="container">
+            <button class="arrow-button" id="leftArrow" onclick="moveLeft()">←</button>
             <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-            <input class="square-textbox textbox-1" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-2" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-3" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-4" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-5" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-6" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-7" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-8" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-9" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-10" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-11" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-12" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-13" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-14" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-15" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-16" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-17" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-18" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-19" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-20" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-21" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-22" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-23" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-24" type ="number" id ="numeric"></input>
-            <input class="square-textbox textbox-25" type ="number" id ="numeric"></input>
-            <button class="register-button" id="registerButton">更新</button> <!-- 更新ボタンに変更 -->
+
+            <input class="square-textbox textbox-1" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-2" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-3" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-4" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-5" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-6" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-7" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-8" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-9" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-10" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-11" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-12" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-13" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-14" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-15" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-16" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-17" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-18" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-19" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-20" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-21" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-22" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-23" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-24" type="number" id="numeric"></input>
+            <input class="square-textbox textbox-25" type="number" id="numeric"></input>
+            <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
         </div>
+
+        
+
     </main>
     <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
     <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
@@ -137,20 +189,45 @@
         const db = firebase.firestore();
 
         document.addEventListener('DOMContentLoaded', function() {
-            // クラウドストレージから選択したビンゴカードのIDとデータを取得
+            // クラウドストレージから選択したビンゴカードのIDを取得
             const docId = localStorage.getItem('selectedBingoCardId');
-            const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
 
-            // データが存在する場合、テキストボックスに表示
-            if (docId && data) {
-                const textboxes = document.querySelectorAll('.square-textbox');
-                textboxes.forEach((textbox, index) => {
-                    textbox.value = data.values[index] || ''; // データが存在すれば代入、なければ空文字をセット
+            // Firestoreからデータを取得してテキストボックスに表示する
+            db.collection('BINGOApp').doc(docId).get()
+                .then(function(doc) {
+                    if (doc.exists) {
+                        const data = doc.data();
+                        const values1 = data.values1; // values1 を取得
+
+                        // テキストボックスに値をセットする
+                        const textboxes = document.querySelectorAll('.square-textbox');
+                        textboxes.forEach((textbox, index) => {
+                            textbox.value = values1[index] || ''; // values1 の値をテキストボックスにセット
+                        });
+                    } else {
+                        console.log('No such document!');
+                    }
+                })
+                .catch(function(error) {
+                    console.log('Error getting document:', error);
                 });
-            } else {
-                console.log('No document ID or data found in localStorage.');
-            }
-            
+            // 前のカードへの移動ボタンのクリックイベントリスナーを設定
+            document.querySelector('#prevButton').addEventListener('click', function() {
+                if (currentCardIndex > 1) {
+                    currentCardIndex--;
+                    updateCardData(currentCardIndex);
+                }
+            });
+
+            // 次のカードへの移動ボタンのクリックイベントリスナーを設定
+            document.querySelector('#nextButton').addEventListener('click', function() {
+                // ここでFirestoreに存在するカードの最大数を取得し、それを使って条件分岐をしましょう。
+                const maxCards = 3; // Firestoreに保存されているカードの最大数
+                if (currentCardIndex < maxCards) {
+                    currentCardIndex++;
+                    updateCardData(currentCardIndex);
+                }
+            });
             // 更新ボタンのクリックイベントリスナーを設定
             document.querySelector('#registerButton').addEventListener('click', function() {
                 const textboxes = document.querySelectorAll('.square-textbox');
@@ -159,14 +236,14 @@
                     values.push(textbox.value);
                 });
 
-                // Save to Firestore
+                // Firestoreに保存
                 db.collection('BINGOApp').doc(docId).update({
-                    values: values,
+                    values1: values, // values1 を更新
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 })
                 .then(function() {
                     console.log('Document updated successfully.');
-                    alert(docId+'の更新が完了しました。');
+                    alert('更新が完了しました。');
                 })
                 .catch(function(error) {
                     console.error('Error updating document:', error);
