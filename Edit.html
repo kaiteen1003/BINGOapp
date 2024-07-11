@@ -180,8 +180,28 @@
     <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
     <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
 
+    <script>
+   
+        document.querySelectorAll('.square-textbox').forEach((textbox, index, textboxes) => {
+            textbox.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    if (textboxes[index].value.length > 2) {
+                        textboxes[index].value = textboxes[index].value.slice(0, 2);
+                    }
+                    let nextTextbox = textboxes[index + 1];
+                    if (index === 11) {
+                        nextTextbox = textboxes[index + 2];
+                    }
+                    if (nextTextbox) {
+                        nextTextbox.focus();
+                    }
+                }
+            });
+        });
+    </script>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>    
     <script>
         firebase.initializeApp({
             apiKey: "AIzaSyBFglLx2pDfHSpyEUUpn0c939BWS1vmzQg",
@@ -191,18 +211,25 @@
         const db = firebase.firestore();
 
         document.addEventListener('DOMContentLoaded', function() {
+            // クラウドストレージから選択したビンゴカードのIDとデータを取得
             const docId = localStorage.getItem('selectedBingoCardId');
             const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
 
+            // データが存在する場合、テキストボックスに表示
             if (docId && data) {
                 const textboxes = document.querySelectorAll('.square-textbox');
+                alert(textboxes);
+                console.log(textboxes); // コンソールにログ出力
                 textboxes.forEach((textbox, index) => {
-                    textbox.value = data.values[index] || '';
+                    // data.values1 ではなく、data.values を参照する
+                    textbox.value = data.values1 || ''; // データが存在すれば代入、なければ空文字をセット
                 });
-            } else {
+            }
+            else {
                 console.log('No document ID or data found in localStorage.');
             }
-
+            
+            // 更新ボタンのクリックイベントリスナーを設定
             document.querySelector('#registerButton').addEventListener('click', function() {
                 const textboxes = document.querySelectorAll('.square-textbox');
                 let values = [];
@@ -210,39 +237,21 @@
                     values.push(textbox.value);
                 });
 
+                // Save to Firestore
                 db.collection('BINGOApp').doc(docId).update({
-                    values: values,
+                    values1: values,
                     timestamp: firebase.firestore.FieldValue.serverTimestamp()
                 })
                 .then(function() {
                     console.log('Document updated successfully.');
-                    alert(docId + 'の更新が完了しました。');
+                    alert(docId+'の更新が完了しました。');
                 })
                 .catch(function(error) {
                     console.error('Error updating document:', error);
                     alert('更新に失敗しました: ' + error.message);
                 });
             });
-
-            if (localStorage.getItem('numbersArray')) {
-                numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
-                document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
-            }
         });
-
-        let numbersArray = [];
-
-        function handleFormSubmit(event) {
-            event.preventDefault();
-            var numeric = document.getElementById("numeric").value;
-            if (numeric !== "") {
-                numbersArray.push(Number(numeric));
-                localStorage.setItem('numbersArray', JSON.stringify(numbersArray));
-                document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
-                document.getElementById('numeric').value = '';
-            }
-            return true;
-        }
     </script>
 </body>
 </html>
