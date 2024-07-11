@@ -138,6 +138,7 @@
         });
 
         const db = firebase.firestore();
+        let grid = [];
 
         document.addEventListener('DOMContentLoaded', function() {
             const docId = localStorage.getItem('selectedBingoCardId');
@@ -147,31 +148,33 @@
                 const textboxes = document.querySelectorAll('.square-textbox');
                 textboxes.forEach((textbox, index) => {
                     textbox.value = data.values[index] || '';
+                    grid.push([textbox.value, (textbox.value === '') ? '1': '0']);
                 });
+                console.log(grid);
             } else {
                 console.log('No document ID or data found in localStorage.');
             }
 
-            document.querySelector('#registerButton').addEventListener('click', function() {
-                const textboxes = document.querySelectorAll('.square-textbox');
-                let values = [];
-                textboxes.forEach(textbox => {
-                    values.push(textbox.value);
-                });
+            // document.querySelector('#registerButton').addEventListener('click', function() {
+            //     const textboxes = document.querySelectorAll('.square-textbox');
+            //     let values = [];
+            //     textboxes.forEach(textbox => {
+            //         values.push(textbox.value);
+            //     });
 
-                db.collection('BINGOApp').doc(docId).update({
-                    values: values,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                })
-                .then(function() {
-                    console.log('Document updated successfully.');
-                    alert(docId + 'の更新が完了しました。');
-                })
-                .catch(function(error) {
-                    console.error('Error updating document:', error);
-                    alert('更新に失敗しました: ' + error.message);
-                });
-            });
+            //     db.collection('BINGOApp').doc(docId).update({
+            //         values: values,
+            //         timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            //     })
+            //     .then(function() {
+            //         console.log('Document updated successfully.');
+            //         alert(docId + 'の更新が完了しました。');
+            //     })
+            //     .catch(function(error) {
+            //         console.error('Error updating document:', error);
+            //         alert('更新に失敗しました: ' + error.message);
+            //     });
+            // });
 
             if (localStorage.getItem('numbersArray')) {
                 numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
