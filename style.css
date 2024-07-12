@@ -116,7 +116,40 @@ margin:                      外側の余白を設定
 
 */
 
+.textbox-1 { top:  177.5px;  left: 77.5px; } /* 画像の高さの30.5% + 20px、幅の13.5% + 10px */
+.textbox-2 { top: 177.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの30.5% + 20px、幅の25% + 10px */
+.textbox-3 { top:  177.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの30.5% + 20px、幅の36.5% + 10px */
+.textbox-4 { top:  177.5px;  left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの30.5% + 20px、幅の48% + 10px */
+.textbox-5 { top:  177.5px;  left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの30.5% + 20px、幅の59.5% + 10px */
 
+.textbox-6 { top: 245.5px; left: 77.5px; } /* 画像の高さの42% + 20px、幅の13.5% + 10px */
+.textbox-7 { top: 245.5px;left: calc(77.5px + 67.5px); } /* 画像の高さの42% + 20px、幅の25% + 10px */
+.textbox-8 { top:245.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの42% + 20px、幅の36.5% + 10px */
+.textbox-9 { top: 245.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの42% + 20px、幅の48% + 10px */
+.textbox-10 { top: 245.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの42% + 20px、幅の59.5% + 10px */
+.textbox-11 { top: 313.5px; left: 77.5px; } /* 画像の高さの53.5% + 20px、幅の13.5% + 10px */
+.textbox-12 { top: 313.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの53.5% + 20px、幅の25% + 10px */
+.textbox-13 { top: 313.5px; left: calc(77.5px + (67.5px * 2)); display: none; } /* 中央のテキストボックスを非表示にする */
+.textbox-14 { top: 313.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの53.5% + 20px、幅の48% + 10px */
+.textbox-15 { top: 313.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの53.5% + 20px、幅の59.5% + 10px */
+
+.textbox-16 { top: 381.5px; left: 77.5px; } /* 画像の高さの65% + 20px、幅の13.5% + 10px */
+.textbox-17 { top: 381.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの65% + 20px、幅の25% + 10px */
+.textbox-18 { top: 381.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの65% + 20px、幅の36.5% + 10px */
+.textbox-19 { top: 381.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの65% + 20px、幅の48% + 10px */
+.textbox-20 { top: 381.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの65% + 20px、幅の59.5% + 10px */
+
+.textbox-21 { top: 445.5px; left: 77.5px; } /* 画像の高さの76.5% + 20px、幅の13.5% + 10px */
+.textbox-22 { top:445.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの76.5% + 20px、幅の25% + 10px */
+.textbox-23 { top: 445.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの76.5% + 20px、幅の36.5% + 10px */
+.textbox-24 { top: 445.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの76.5% + 20px、幅の48% + 10px */
+.textbox-25 { top: 445.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの76.5% + 20px、幅の59.5% + 10px */
+.form-container{
+    margin: 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
 h1 {
     font-size: 3rem; 
     margin-bottom: 20px; 
