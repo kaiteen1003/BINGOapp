@@ -170,8 +170,10 @@
                 <input class="square-textbox textbox-25" type="number" id="numeric25"></input>
                 <button id="rightArrow" class="arrow-button" >→</button>
                 <form class="input-form" onsubmit="return handleFormSubmit(event)">
+                    <span id="pageInfo"></span> <!-- 現在のページ数を表示する部分 -->
                     <button class="register-button" id="registerButton">更新</button> <!-- 更新ボタンに変更 -->
                 </form>
+                
                 
             </div>
         </div>
@@ -233,14 +235,13 @@
         */
 
 
-
         //document.addEventListener->画面が起動したら動く関数
         document.addEventListener('DOMContentLoaded', function() {
             // ローカルストレージからドキュメントIDを取得してグローバル変数に格納
             storedDocID = localStorage.getItem('selectedBingoCardId');
             if (storedDocID) {
-                alert(`Document ID: ${storedDocID}`);
                 fetchFirestoreData(storedDocID); // Firestoreのデータを取得する関数を呼び出し
+                updatePageInfo();
             } else {
                 alert(`Document IDが読み込めていません`);
             }
@@ -264,8 +265,10 @@
                         currentValuesIndex = maxValuesIndex;
                     }
 
-                    alert(`currentValuesIndex: ${currentValuesIndex}, maxValuesIndex: ${maxValuesIndex}`);
                     console.log(allValues); // 確認用：allValuesの内容をコンソールに出力
+
+                    // データ取得後にテキストボックスを更新する
+                    updateTextBoxValues();
                 } else {
                     console.error('No such document!');
                 }
@@ -273,102 +276,101 @@
                 console.error('Error getting document:', error);
             });
         }
-       
-       // Firestoreからデータを取得して初期テキストボックスの値を設定する関数
-       function updateTextBoxValues() {
-            db.collection('BINGOApp').doc(docId).get().then((doc) => {
-                const textboxes = document.querySelectorAll('.square-textbox');
-                let values = [];
-  
-                if (doc.exists) {
-                    const data = doc.data();
-                    
-                    // Determine the maximum index available based on the fields present in the document
-                    maxValuesIndex = 1;
-                    while (data.hasOwnProperty(`values${maxValuesIndex }`)) {
-                        maxValuesIndex++;
-                    }
-                    alert("currentValuesIndex" + currentValuesIndex + "maxValuesIndex"+maxValuesIndex);
-                    // Populate values array with current textbox values
-                    textboxes.forEach((textbox, index) => {
-                        textbox.value = data[`values${currentValuesIndex}`][index] || ''; // Firestoreから値を取得してテキストボックスに表示
-                        values.push(textbox.value); // 値をvalues配列に追加
-                    });
 
-                   
-                    // Ensure currentValuesIndex stays within bounds
-                    if (currentValuesIndex > maxValuesIndex) {
-                        currentValuesIndex = maxValuesIndex;
-                    }
-                    
-                }
-            }).catch(function(error) {
-                console.error('Error getting document:', error);
+
+
+        // Firestoreからデータを取得して初期テキストボックスの値を設定する関数
+        function updateTextBoxValues() {
+            // BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
+            const valuesIndex = `values${currentValuesIndex}`;
+
+            // allValuesから現在のページのvaluesを取得
+            const valuesContents = allValues[valuesIndex];
+
+            if (!valuesContents) {
+                console.error(`No data found for ${valuesIndex}`);
+                return;
+            }
+
+            // テキストボックスに値を設定する
+            const textboxes = document.querySelectorAll('.square-textbox');
+            textboxes.forEach((textbox, index) => {
+                textbox.value = valuesContents[index] || ''; // 空文字列でない場合のみ設定
             });
         }
 
+
+
         // 現在の画面のBINGOカードを更新する機能
         function save(){
-            db.collection('BINGOApp').doc(storedDocID).update({
-                [allValues[`values${currentValuesIndex}`]]: values,
-            
-                }).then(function() {
+            // 現在表示しているテキストボックスの中身を取りだして配列に直す
+            const textboxes = document.querySelectorAll('.square-textbox');
+            let values = [];
+            textboxes.forEach(textbox => {
+                values.push(textbox.value);
+            });
+            //BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
+            const fieldName = `values${currentValuesIndex}`;
+
+            // firebaseにテキストボックスの内容を格納する
+            // updateObjectを使わないと動的にフィールド名を変えられない。
+            const updateObject = {};
+            updateObject[fieldName] = values;
+
+            // fieldName を直接指定する
+            db.collection('BINGOApp').doc(storedDocID).update(updateObject)
+                .then(function() {
                     console.log('Document updated successfully.');
                 }).catch(function(error) {
                     console.error('Error updating document:', error);
                 });
+        }
 
+        // 現在のページ数を表示する関数
+        function updatePageInfo() {
+            const pageInfo = document.getElementById('pageInfo');
+            pageInfo.textContent = `${currentValuesIndex}/${maxValuesIndex} 枚中`;
         }
 
 
 
 
+        // 右矢印の処理
         document.querySelector('#rightArrow').addEventListener('click', function() {
+            event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
+            
+            // BINGOカードが最後なら右に進めない処理
             if (currentValuesIndex < maxValuesIndex) {
                 save();
+                fetchFirestoreData(storedDocID);
                 currentValuesIndex++;
                 updateTextBoxValues();
+                updatePageInfo();
             }
         });
 
+        // 左矢印の処理
         document.querySelector('#leftArrow').addEventListener('click', function() {
+            event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
+
+            // BINGOカードが一枚目なら左に進めない処理
             if (currentValuesIndex > 1) {
                 save();
+                fetchFirestoreData(storedDocID);
                 currentValuesIndex--;
                 updateTextBoxValues();
+                updatePageInfo();
             }
         });
-        document.querySelector('#registerButton').addEventListener('click', function() {
-            alert("start");
-            save();
-            alert("end");
+
+        //更新ボタンの処理
+        document.querySelector('#registerButton').addEventListener('click', function(event) {
+            event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
+            //保存のみ
+            save();//firestoreに更新する
+            fetchFirestoreData(storedDocID);//firestoreに更新を掛けたのでallValuesにも更新をかける
         });
-            
     </script> 
 </body>
 </html>
 
-<!-- 
-db.collection('BINGOApp').doc(docId).get().then((doc) => {
-    if (doc.exists) {
-        const data = doc.data();
-        
-        // Determine the maximum index available based on the fields present in the document
-        maxValuesIndex = 1;
-        while (data.hasOwnProperty(values${maxValuesIndex + 1})) {
-            maxValuesIndex++;
-        }
-
-        // Ensure currentValuesIndex stays within bounds
-        if (currentValuesIndex > maxValuesIndex) {
-            currentValuesIndex = maxValuesIndex;
-        }
-
-
-    } else {
-        console.log('No such document!');
-    }
-}).catch((error) => {
-    console.error('Error fetching document:', error);
-});
-} -->
