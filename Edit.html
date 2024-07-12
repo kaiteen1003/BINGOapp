@@ -212,8 +212,8 @@
 
         // グローバル変数群
         let allValues = {};//firebaseから持ってきた配列をまとめて格納している
-        let currentValuesIndex = 1;//現在カードが何枚目かのカウント変数
-        let maxValuesIndex = 1; //valuesいくらまであるかの変数
+        let currentValuesIndex = 0;//現在カードが何枚目かのカウント変数
+        let maxValuesIndex = 0; //valuesいくらまであるかの変数
         let storedDocID = null; //ひとつ前の画面から持ってきたドキュメントID
         const db = firebase.firestore();
 
@@ -252,7 +252,6 @@
             return db.collection('BINGOApp').doc(storedDocID).get().then((doc) => {
                 if (doc.exists) {
                     const data = doc.data();
-                    maxValuesIndex = 1;
 
                     // values1, values2, values3, ... というプロパティを持つデータを取得してallValuesに格納
                     while (data.hasOwnProperty(`values${maxValuesIndex}`)) {
@@ -309,6 +308,7 @@
             textboxes.forEach(textbox => {
                 values.push(textbox.value);
             });
+            
             //BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
             const fieldName = `values${currentValuesIndex}`;
 
@@ -321,6 +321,7 @@
             db.collection('BINGOApp').doc(storedDocID).update(updateObject)
                 .then(function() {
                     console.log('Document updated successfully.');
+                    alert(currentValuesIndex+"枚目を更新")
                 }).catch(function(error) {
                     console.error('Error updating document:', error);
                 });
@@ -338,14 +339,16 @@
         // 右矢印の処理
         document.querySelector('#rightArrow').addEventListener('click', function() {
             event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
-            
+
             // BINGOカードが最後なら右に進めない処理
-            if (currentValuesIndex < maxValuesIndex) {
+            if (currentValuesIndex < maxValuesIndex+1) {
                 save();
                 fetchFirestoreData(storedDocID);
+
                 currentValuesIndex++;
                 updateTextBoxValues();
                 updatePageInfo();
+
             }
         });
 
@@ -357,9 +360,11 @@
             if (currentValuesIndex > 1) {
                 save();
                 fetchFirestoreData(storedDocID);
+
                 currentValuesIndex--;
                 updateTextBoxValues();
                 updatePageInfo();
+
             }
         });
 
