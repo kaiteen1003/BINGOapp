@@ -200,6 +200,7 @@
 
         // グローバル変数群
         let allValues = {};//firebaseから持ってきた配列をまとめて格納している
+        let allValues_2ti = {}; // 空のオブジェクトで初期化
         let currentValuesIndex = 1;//現在カードが何枚目かのカウント変数
         let maxValuesIndex = 1; //valuesいくらまであるかの変数
         let storedDocID = null; //ひとつ前の画面から持ってきたドキュメントID
@@ -225,6 +226,30 @@
         */
 
 
+
+        // allValuesとBINGOnumの値を比較して、対応するallValues_2tiを更新する関数
+        function updateAllValues_2ti() {
+            // currentValuesIndexに対応するvaluesContentsを取得
+            const valuesIndex = `values${currentValuesIndex}`;
+            const valuesContents = allValues[valuesIndex];
+            
+            // 対応するallValues_2tiを取得
+            const allValues_2tiContents = allValues_2ti[valuesIndex];
+
+            // valuesContentsとBINGOnumの値を比較してallValues_2tiを更新
+            valuesContents.forEach((number, index) => {
+                if (index === 12) {
+                    allValues_2tiContents[index] = 1; // 13番目の要素を1で初期化
+                } else if (BINGOnum.includes(number)) {
+                    allValues_2tiContents[index] = 1; // BINGOnumに含まれる場合は1をセット
+                } else {
+                    allValues_2tiContents[index] = 0; // 含まれない場合は0をセット
+                }
+            });
+        }
+
+
+
         //document.addEventListener->画面が起動したら動く関数
         document.addEventListener('DOMContentLoaded', function() {
             // ローカルストレージからドキュメントIDを取得してグローバル変数に格納
@@ -236,7 +261,22 @@
             } else {
                 alert(`Document IDが読み込めていません`);
             }
+
+            
+
         });
+
+
+        // BINGOカードの状態配列を初期化する関数（13番目の要素を1で初期化）
+        function initializeStatusArrays(maxValuesIndex) {
+            let allStatusArrays = {};
+            for (let i = 1; i <= maxValuesIndex; i++) {
+                let statusArray = Array(25).fill(0); // 25個の要素を0で初期化
+                statusArray[12] = 1; // 13番目の要素を1で初期化
+                allStatusArrays[`values${i}`] = statusArray;
+            }
+            return allStatusArrays;
+        }
 
         // Firestoreからデータを取得する関数
         function fetchFirestoreData(storedDocID) {
@@ -249,13 +289,11 @@
                         allValues[`values${maxValuesIndex}`] = data[`values${maxValuesIndex}`];
                         maxValuesIndex++;
                     }
-                    // console.log( "allValues"+allValues);
                     maxValuesIndex-=1;
                     // currentValuesIndexが上限を超えないように調整
                     if (currentValuesIndex > maxValuesIndex) {
                         currentValuesIndex = maxValuesIndex;
                     }
-
 
                     console.log(allValues); // 確認用：allValuesの内容をコンソールに出力
 
@@ -264,6 +302,9 @@
                     textboxes.forEach((textbox, index) => {
                         textbox.value = allValues['values1'][index] || ''; // 空文字列でない場合のみ設定
                     });
+                    allValues_2ti = initializeStatusArrays(maxValuesIndex);
+
+                    console.log(allValues_2ti);  // コンソールに出力して確認
                 } else {
                     console.error('No such document!');
                 }
@@ -316,28 +357,26 @@
             });
         }
 
+        // 数字が一致する.square-textboxの背景色をまとめて変更する関数
+        function highlightMatchingTextboxes() {
+            const valuesIndex = `values${currentValuesIndex}`;
+            const valuesContents = allValues[valuesIndex];
 
-        function save() {
-            const currentIndex = currentValuesIndex; // ローカル変数として現在のインデックスを固定化する
-
-            const textboxes = document.querySelectorAll('.square-textbox');
-            let values = [];
-            textboxes.forEach(textbox => {
-                values.push(textbox.value);
+            // すべての.square-textboxを取得
+            const allTextboxes = document.querySelectorAll('.square-textbox');
+            // すべての.square-textboxの背景色をリセット（白色にする）
+            allTextboxes.forEach((textbox, index) => {
+                textbox.style.backgroundColor = 'white';
             });
+            // valuesContentsの数字とBINGOnumの数字を比較して、一致したら背景色を変更
+            valuesContents.forEach((number, index) => {
+                const textboxIndex = index + 1; // .square-textboxのインデックス（1から始まる）
+                const textbox = document.querySelector(`.textbox-${textboxIndex}`);
 
-            const fieldName = `values${currentIndex}`;
-
-            const updateObject = {};
-            updateObject[fieldName] = values;
-
-            db.collection('BINGOApp').doc(storedDocID).update(updateObject)
-                .then(function() {
-                    console.log('Document updated successfully.');
-                    // alert(currentIndex + "枚目を更新3"); // ローカル変数 currentIndex を利用する
-                }).catch(function(error) {
-                    console.error('Error updating document:', error);
-                });
+                if (BINGOnum.includes(number)) {
+                    textbox.style.backgroundColor = 'lightyellow';
+                }
+            });
         }
 
 
@@ -347,6 +386,9 @@
             pageInfo.textContent = `${currentValuesIndex}/${maxValuesIndex} 枚中`;
         }
 
+
+
+        // 入力ボタンの処理
         document.querySelector('.input-submit').addEventListener('click', function(event) {
             event.preventDefault(); // submitボタンのデフォルトの動作を停止する
 
@@ -360,6 +402,11 @@
 
                     // BINGOnum配列の内容を表示
                     output.textContent = "入力された数字：" + BINGOnum.join(", ");
+
+                    // 数字が一致する.square-textboxの背景色を変更する
+                    highlightMatchingTextboxes();
+                    updateAllValues_2ti()
+                    checkBingo()
                 }
             }
         });
@@ -385,10 +432,10 @@
 
             // BINGOカードが最後なら右に進めない処理
             if (currentValuesIndex < maxValuesIndex) {
-                save();
-                updateAllValues()
+                updateAllValues()         
                 currentValuesIndex++;
                 updateTextBoxValues();
+                highlightMatchingTextboxes();
                 updatePageInfo();
 
             }
@@ -400,10 +447,10 @@
 
             // BINGOカードが一枚目なら左に進めない処理
             if (currentValuesIndex > 1) {
-                save();
                 updateAllValues()
                 currentValuesIndex--;
                 updateTextBoxValues();
+                highlightMatchingTextboxes();
                 updatePageInfo();
 
             }
@@ -428,40 +475,67 @@
             return true;
         }
 
-        //処理少ないパターン
-        //引数 配列の場所(何番目にあるか)
-        function bingo_check(number){
-
-            let column = number % 5;
-            let row = number / 5;
-
-            //横列処理
-            for(let i = 0; i < 5; i++){
-                if(grid[i + 5*row][1] == 0){break;}
-                if(i==4){return true;}
-            }
-            // 縦列処理
-            for(let i = 0; i < 5; i++){
-                if(grid[i*5 + column][1] == 0){break;}
-                if(i==4){return true;}
-            }
-
-            //斜めの処理
-            if(number % 4 == 0){                // 意味的には && number !== 0 || 24 を入れた方がいい
-                for(let i = 0; i < 5; i++){
-                    if(grid[4*i][1] == 0){break;}
-                    if(i==4){return true;}
+        // BINGOの判定を行う関数
+        function checkBingo() {
+            // 横列のチェック
+            for (let i = 0; i < 5; i++) {
+                let rowComplete = true;
+                for (let j = 0; j < 5; j++) {
+                    if (allValues_2ti[`values${currentValuesIndex}`][i * 5 + j] !== 1) {
+                        rowComplete = false;
+                        break;
+                    }
+                }
+                if (rowComplete) {
+                    alert("BINGO! 横列がそろいました。");
+                    return true;
                 }
             }
-            if(number % 6 == 0){
-                for(let i = 0; i < 5; i++){
-                    if(grid[6*(i+1)][1] == 0){break;}
-                    if(i==4){return true;}
+
+            // 縦列のチェック
+            for (let i = 0; i < 5; i++) {
+                let columnComplete = true;
+                for (let j = 0; j < 5; j++) {
+                    if (allValues_2ti[`values${currentValuesIndex}`][j * 5 + i] !== 1) {
+                        columnComplete = false;
+                        break;
+                    }
                 }
+                if (columnComplete) {
+                    alert("BINGO! 縦列がそろいました。");
+                    return true;
+                }
+            }
+
+            // 斜めのチェック（左上から右下）
+            let diagonalComplete1 = true;
+            for (let i = 0; i < 5; i++) {
+                if (allValues_2ti[`values${currentValuesIndex}`][i * 5 + i] !== 1) {
+                    diagonalComplete1 = false;
+                    break;
+                }
+            }
+            if (diagonalComplete1) {
+                alert("BINGO! 斜めがそろいました。");
+                return true;
+            }
+
+            // 斜めのチェック（右上から左下）
+            let diagonalComplete2 = true;
+            for (let i = 0; i < 5; i++) {
+                if (allValues_2ti[`values${currentValuesIndex}`][i * 5 + (4 - i)] !== 1) {
+                    diagonalComplete2 = false;
+                    break;
+                }
+            }
+            if (diagonalComplete2) {
+                alert("BINGO! 斜めがそろいました。");
+                return true;
             }
 
             return false;
         }
+
     </script>
 </body>
 </html>
