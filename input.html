@@ -80,7 +80,7 @@
         
         }
 
-        .input-submit {
+        .input-submit,.back-number {
             padding: 8px 15px;
             background-color: #007bff;
             color: #fff;
@@ -143,39 +143,43 @@
                 <button class="card-button" onclick="location.href='./Select.html'">カード選択に戻る</button>
             </div>
             <div class="container">
-                <button class="arrow-button" id="leftArrow" onclick="moveLeft()">←</button>
+                <button class="arrow-button" id="leftArrow" >←</button>
                 <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-                <input class="square-textbox textbox-1" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-2" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-3" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-4" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-5" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-6" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-7" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-8" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-9" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-10" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-11" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-12" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-13" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-14" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-15" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-16" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-17" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-18" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-19" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-20" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-21" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-22" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-23" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-24" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-25" type="number" id="numeric"></input>
-                <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
+                <input class="square-textbox textbox-1" type="number" id="numeric1"></input>
+                <input class="square-textbox textbox-2" type="number" id="numeric2"></input>
+                <input class="square-textbox textbox-3" type="number" id="numeric3"></input>
+                <input class="square-textbox textbox-4" type="number" id="numeric4"></input>
+                <input class="square-textbox textbox-5" type="number" id="numeric5"></input>
+                <input class="square-textbox textbox-6" type="number" id="numeric6"></input>
+                <input class="square-textbox textbox-7" type="number" id="numeric7"></input>
+                <input class="square-textbox textbox-8" type="number" id="numeric8"></input>
+                <input class="square-textbox textbox-9" type="number" id="numeric9"></input>
+                <input class="square-textbox textbox-10" type="number" id="numeric10"></input>
+                <input class="square-textbox textbox-11" type="number" id="numeric11"></input>
+                <input class="square-textbox textbox-12" type="number" id="numeric12"></input>
+                <input class="square-textbox textbox-13" type="number" id="numeric13"></input>
+                <input class="square-textbox textbox-14" type="number" id="numeric14"></input>
+                <input class="square-textbox textbox-15" type="number" id="numeric15"></input>
+                <input class="square-textbox textbox-16" type="number" id="numeric16"></input>
+                <input class="square-textbox textbox-17" type="number" id="numeric17"></input>
+                <input class="square-textbox textbox-18" type="number" id="numeric18"></input>
+                <input class="square-textbox textbox-19" type="number" id="numeric19"></input>
+                <input class="square-textbox textbox-20" type="number" id="numeric20"></input>
+                <input class="square-textbox textbox-21" type="number" id="numeric21"></input>
+                <input class="square-textbox textbox-22" type="number" id="numeric22"></input>
+                <input class="square-textbox textbox-23" type="number" id="numeric23"></input>
+                <input class="square-textbox textbox-24" type="number" id="numeric24"></input>
+                <input class="square-textbox textbox-25" type="number" id="numeric25"></input>
+                <button id="rightArrow" class="arrow-button" >→</button>               
                 <form class="input-form" onsubmit="return handleFormSubmit(event)">
-                    <input type="number" class="input-number" name="numeric" min="1" max="75">
+                    <span id="pageInfo"></span> <!-- 現在のページ数を表示する部分 -->
+                    <input type="number" class="input-number" id="numeric" name="numeric" min="1" max="75">
                     <button type="submit" class="input-submit">入力</button>
                     <p class="input-output" id="arrayOutput"></p>
+                    <div id="output" class="input-output"></div>
+                    <button type="submit" class="back-number">一つ戻す</button>
                 </form>
+                
                 
             </div>
         </div>
@@ -185,63 +189,226 @@
     <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
 
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>    
     <script>
+        //firebaseのAPIキー(最初に書くのが望ましい)
         firebase.initializeApp({
             apiKey: "AIzaSyBFglLx2pDfHSpyEUUpn0c939BWS1vmzQg",
             projectId: "bingoapp-8c5c0",
         });
 
+
+        // グローバル変数群
+        let allValues = {};//firebaseから持ってきた配列をまとめて格納している
+        let currentValuesIndex = 1;//現在カードが何枚目かのカウント変数
+        let maxValuesIndex = 1; //valuesいくらまであるかの変数
+        let storedDocID = null; //ひとつ前の画面から持ってきたドキュメントID
+        const BINGOnum = [];//BINGOで発表された番号格納配列
         const db = firebase.firestore();
+        
 
+
+       
+        /* 
+        allValuesについて
+
+            ex)　values1の内容の取り出し
+                  　const values1Contents = allValues['values1'];
+
+            ex) 　現在表示しているカードでの処理
+                    const valuesIndex = `values${currentValuesIndex}`;
+                    const valuesContents = allValues[valuesIndex];
+
+
+             連想配列で定義しているのでこんな感じで取り出してね。
+
+        */
+
+
+        //document.addEventListener->画面が起動したら動く関数
         document.addEventListener('DOMContentLoaded', function() {
-            const docId = localStorage.getItem('selectedBingoCardId');
-            const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
-            var numdata=new Array(25);
-
-            if (docId && data) {
-                const textboxes = document.querySelectorAll('.square-textbox');
-                textboxes.forEach((textbox, index) => {
-                textbox.value = data.values[index] || '';
-                }); 
-                alert(textboxes[0]);
-            
-                numdata=textboxes;
-                for(let x=0; x<3; x++){
-                        alert('このデータは' +numdata[x]+ 'です。');
-                    } 
+            // ローカルストレージからドキュメントIDを取得してグローバル変数に格納
+            storedDocID = localStorage.getItem('selectedBingoCardId');
+            if (storedDocID) {
+                fetchFirestoreData(storedDocID).then(() => {
+                    updatePageInfo();
+                });
             } else {
-                console.log('No document ID or data found in localStorage.');
+                alert(`Document IDが読み込めていません`);
             }
+        });
 
-            document.querySelector('#registerButton').addEventListener('click', function() {
+        // Firestoreからデータを取得する関数
+        function fetchFirestoreData(storedDocID) {
+            return db.collection('BINGOApp').doc(storedDocID).get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    console.log("data"+data);
+                    // values1, values2, values3, ... というプロパティを持つデータを取得してallValuesに格納
+                    while (data.hasOwnProperty(`values${maxValuesIndex}`)) {
+                        allValues[`values${maxValuesIndex}`] = data[`values${maxValuesIndex}`];
+                        maxValuesIndex++;
+                    }
+                    // console.log( "allValues"+allValues);
+                    maxValuesIndex-=1;
+                    // currentValuesIndexが上限を超えないように調整
+                    if (currentValuesIndex > maxValuesIndex) {
+                        currentValuesIndex = maxValuesIndex;
+                    }
+
+
+                    console.log(allValues); // 確認用：allValuesの内容をコンソールに出力
+
+                    // テキストボックスに値を設定する
+                    const textboxes = document.querySelectorAll('.square-textbox');
+                    textboxes.forEach((textbox, index) => {
+                        textbox.value = allValues['values1'][index] || ''; // 空文字列でない場合のみ設定
+                    });
+                } else {
+                    console.error('No such document!');
+                }
+            }).catch((error) => {
+                console.error('Error getting document:', error);
+            });
+        }
+
+
+        // allValuesを更新する関数
+        function updateAllValues() {
+            return new Promise((resolve, reject) => {
                 const textboxes = document.querySelectorAll('.square-textbox');
                 let values = [];
                 textboxes.forEach(textbox => {
                     values.push(textbox.value);
                 });
 
-                db.collection('BINGOApp').doc(docId).update({
-                    values: values,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                })
-                .then(function() {
-                    console.log('Document updated successfully.');
-                    alert(docId + 'の更新が完了しました。');
-                })
-                .catch(function(error) {
-                    console.error('Error updating document:', error);
-                    alert('更新に失敗しました: ' + error.message);
-                });
+                // BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
+                const valuesIndex = `values${currentValuesIndex}`;
+
+                // allValuesの該当部分を上書き
+                allValues[valuesIndex] = values;
+
+                // ログで確認
+                console.log(`Updated ${valuesIndex} in allValues:`, allValues[valuesIndex]);
+                
+                resolve();
+            });
+        }
+
+
+        // Firestoreからデータを取得して初期テキストボックスの値を設定する関数
+        function updateTextBoxValues() {
+            // BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
+            const valuesIndex = `values${currentValuesIndex}`;
+
+            // allValuesから現在のページのvaluesを取得
+            const valuesContents = allValues[valuesIndex];
+
+            if (!valuesContents) {
+                console.error(`No data found for ${valuesIndex}`);
+                return;
+            }
+
+            // テキストボックスに値を設定する
+            const textboxes = document.querySelectorAll('.square-textbox');
+            textboxes.forEach((textbox, index) => {
+                textbox.value = valuesContents[index] || ''; // 空文字列でない場合のみ設定
+            });
+        }
+
+
+        function save() {
+            const currentIndex = currentValuesIndex; // ローカル変数として現在のインデックスを固定化する
+
+            const textboxes = document.querySelectorAll('.square-textbox');
+            let values = [];
+            textboxes.forEach(textbox => {
+                values.push(textbox.value);
             });
 
-            if (localStorage.getItem('numbersArray')) {
-                numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
-                document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
+            const fieldName = `values${currentIndex}`;
+
+            const updateObject = {};
+            updateObject[fieldName] = values;
+
+            db.collection('BINGOApp').doc(storedDocID).update(updateObject)
+                .then(function() {
+                    console.log('Document updated successfully.');
+                    // alert(currentIndex + "枚目を更新3"); // ローカル変数 currentIndex を利用する
+                }).catch(function(error) {
+                    console.error('Error updating document:', error);
+                });
+        }
+
+
+        // 現在のページ数を表示する関数
+        function updatePageInfo() {
+            const pageInfo = document.getElementById('pageInfo');
+            pageInfo.textContent = `${currentValuesIndex}/${maxValuesIndex} 枚中`;
+        }
+
+        document.querySelector('.input-submit').addEventListener('click', function(event) {
+            event.preventDefault(); // submitボタンのデフォルトの動作を停止する
+
+            const numberInput = document.getElementById("numeric");
+            const output = document.getElementById("output");
+
+            if (numberInput) {
+                const number = numberInput.value;
+                if (number) {
+                    BINGOnum.push(number);
+
+                    // BINGOnum配列の内容を表示
+                    output.textContent = "入力された数字：" + BINGOnum.join(", ");
+                }
             }
         });
 
-        let numbersArray = [];
+
+
+        document.querySelector('.back-number').addEventListener('click', function(event) {
+            event.preventDefault(); // ボタンのデフォルトの動作を停止する
+
+            if (BINGOnum.length > 0) {
+                BINGOnum.pop(); // 配列の最後尾（最新の数字）を削除する
+
+                // 更新されたBINGOnum配列の内容を表示
+                const output = document.getElementById("output");
+                output.textContent = "入力された数字：" + BINGOnum.join(", ");
+            }
+        });
+
+
+        // 右矢印の処理
+        document.querySelector('#rightArrow').addEventListener('click', function() {
+            event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
+
+            // BINGOカードが最後なら右に進めない処理
+            if (currentValuesIndex < maxValuesIndex) {
+                save();
+                updateAllValues()
+                currentValuesIndex++;
+                updateTextBoxValues();
+                updatePageInfo();
+
+            }
+        });
+
+        // 左矢印の処理
+        document.querySelector('#leftArrow').addEventListener('click', function() {
+            event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
+
+            // BINGOカードが一枚目なら左に進めない処理
+            if (currentValuesIndex > 1) {
+                save();
+                updateAllValues()
+                currentValuesIndex--;
+                updateTextBoxValues();
+                updatePageInfo();
+
+            }
+        });
+
 
         function handleFormSubmit(event) {
             event.preventDefault();
@@ -259,6 +426,41 @@
                 }
             } 
             return true;
+        }
+
+        //処理少ないパターン
+        //引数 配列の場所(何番目にあるか)
+        function bingo_check(number){
+
+            let column = number % 5;
+            let row = number / 5;
+
+            //横列処理
+            for(let i = 0; i < 5; i++){
+                if(grid[i + 5*row][1] == 0){break;}
+                if(i==4){return true;}
+            }
+            // 縦列処理
+            for(let i = 0; i < 5; i++){
+                if(grid[i*5 + column][1] == 0){break;}
+                if(i==4){return true;}
+            }
+
+            //斜めの処理
+            if(number % 4 == 0){                // 意味的には && number !== 0 || 24 を入れた方がいい
+                for(let i = 0; i < 5; i++){
+                    if(grid[4*i][1] == 0){break;}
+                    if(i==4){return true;}
+                }
+            }
+            if(number % 6 == 0){
+                for(let i = 0; i < 5; i++){
+                    if(grid[6*(i+1)][1] == 0){break;}
+                    if(i==4){return true;}
+                }
+            }
+
+            return false;
         }
     </script>
 </body>

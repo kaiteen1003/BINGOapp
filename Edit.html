@@ -212,8 +212,8 @@
 
         // グローバル変数群
         let allValues = {};//firebaseから持ってきた配列をまとめて格納している
-        let currentValuesIndex = 0;//現在カードが何枚目かのカウント変数
-        let maxValuesIndex = 0; //valuesいくらまであるかの変数
+        let currentValuesIndex = 1;//現在カードが何枚目かのカウント変数
+        let maxValuesIndex = 1; //valuesいくらまであるかの変数
         let storedDocID = null; //ひとつ前の画面から持ってきたドキュメントID
         const db = firebase.firestore();
 
@@ -240,8 +240,9 @@
             // ローカルストレージからドキュメントIDを取得してグローバル変数に格納
             storedDocID = localStorage.getItem('selectedBingoCardId');
             if (storedDocID) {
-                fetchFirestoreData(storedDocID); // Firestoreのデータを取得する関数を呼び出し
-                updatePageInfo();
+                fetchFirestoreData(storedDocID).then(() => {
+                    updatePageInfo();
+                });
             } else {
                 alert(`Document IDが読み込めていません`);
             }
@@ -252,22 +253,27 @@
             return db.collection('BINGOApp').doc(storedDocID).get().then((doc) => {
                 if (doc.exists) {
                     const data = doc.data();
-
+                    console.log("data"+data);
                     // values1, values2, values3, ... というプロパティを持つデータを取得してallValuesに格納
                     while (data.hasOwnProperty(`values${maxValuesIndex}`)) {
                         allValues[`values${maxValuesIndex}`] = data[`values${maxValuesIndex}`];
                         maxValuesIndex++;
                     }
-
+                    // console.log( "allValues"+allValues);
+                    maxValuesIndex-=1;
                     // currentValuesIndexが上限を超えないように調整
                     if (currentValuesIndex > maxValuesIndex) {
                         currentValuesIndex = maxValuesIndex;
                     }
 
+
                     console.log(allValues); // 確認用：allValuesの内容をコンソールに出力
 
-                    // データ取得後にテキストボックスを更新する
-                    updateTextBoxValues();
+                    // テキストボックスに値を設定する
+                    const textboxes = document.querySelectorAll('.square-textbox');
+                    textboxes.forEach((textbox, index) => {
+                        textbox.value = allValues['values1'][index] || ''; // 空文字列でない場合のみ設定
+                    });
                 } else {
                     console.error('No such document!');
                 }
@@ -276,6 +282,28 @@
             });
         }
 
+
+        // allValuesを更新する関数
+        function updateAllValues() {
+            return new Promise((resolve, reject) => {
+                const textboxes = document.querySelectorAll('.square-textbox');
+                let values = [];
+                textboxes.forEach(textbox => {
+                    values.push(textbox.value);
+                });
+
+                // BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
+                const valuesIndex = `values${currentValuesIndex}`;
+
+                // allValuesの該当部分を上書き
+                allValues[valuesIndex] = values;
+
+                // ログで確認
+                console.log(`Updated ${valuesIndex} in allValues:`, allValues[valuesIndex]);
+                
+                resolve();
+            });
+        }
 
 
         // Firestoreからデータを取得して初期テキストボックスの値を設定する関数
@@ -299,36 +327,33 @@
         }
 
 
+        function save() {
+            const currentIndex = currentValuesIndex; // ローカル変数として現在のインデックスを固定化する
 
-        // 現在の画面のBINGOカードを更新する機能
-        function save(){
-            // 現在表示しているテキストボックスの中身を取りだして配列に直す
             const textboxes = document.querySelectorAll('.square-textbox');
             let values = [];
             textboxes.forEach(textbox => {
                 values.push(textbox.value);
             });
-            
-            //BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
-            const fieldName = `values${currentValuesIndex}`;
 
-            // firebaseにテキストボックスの内容を格納する
-            // updateObjectを使わないと動的にフィールド名を変えられない。
+            const fieldName = `values${currentIndex}`;
+
             const updateObject = {};
             updateObject[fieldName] = values;
 
-            // fieldName を直接指定する
             db.collection('BINGOApp').doc(storedDocID).update(updateObject)
                 .then(function() {
                     console.log('Document updated successfully.');
-                    alert(currentValuesIndex+"枚目を更新")
+                    // alert(currentIndex + "枚目を更新3"); // ローカル変数 currentIndex を利用する
                 }).catch(function(error) {
                     console.error('Error updating document:', error);
                 });
         }
 
+
         // 現在のページ数を表示する関数
         function updatePageInfo() {
+            
             const pageInfo = document.getElementById('pageInfo');
             pageInfo.textContent = `${currentValuesIndex}/${maxValuesIndex} 枚中`;
         }
@@ -341,10 +366,9 @@
             event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
 
             // BINGOカードが最後なら右に進めない処理
-            if (currentValuesIndex < maxValuesIndex+1) {
+            if (currentValuesIndex < maxValuesIndex) {
                 save();
-                fetchFirestoreData(storedDocID);
-
+                updateAllValues()
                 currentValuesIndex++;
                 updateTextBoxValues();
                 updatePageInfo();
@@ -359,8 +383,7 @@
             // BINGOカードが一枚目なら左に進めない処理
             if (currentValuesIndex > 1) {
                 save();
-                fetchFirestoreData(storedDocID);
-
+                updateAllValues()
                 currentValuesIndex--;
                 updateTextBoxValues();
                 updatePageInfo();
@@ -373,7 +396,7 @@
             event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
             //保存のみ
             save();//firestoreに更新する
-            fetchFirestoreData(storedDocID);//firestoreに更新を掛けたのでallValuesにも更新をかける
+            updateAllValues();//firestoreに更新を掛けたのでallValuesにも更新をかける
         });
     </script> 
 </body>

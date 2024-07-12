@@ -64,10 +64,6 @@
             <!-- ドキュメントIDの一覧がここに表示されます -->
         </div>
     </div>
-    <div class="navigation-buttons">
-        <button id="left-arrow" class="nav-button">&larr;</button>
-        <button id="right-arrow" class="nav-button">&rarr;</button>
-    </div>
     <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
     <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
@@ -87,34 +83,33 @@
         function loadBingoCards() {
             db.collection('BINGOApp').orderBy('timestamp', 'desc').get()
             .then((querySnapshot) => {
+                const bingoList = document.getElementById('bingoList');
                 querySnapshot.forEach((doc) => {
-                    bingoCards.push({ id: doc.id, data: doc.data() });
+                    const bingoCard = document.createElement('div');
+                    bingoCard.className = 'bingo-card';
+                    bingoCard.textContent = `Name: ${doc.id}`;
+                    bingoCard.addEventListener('click', () => {
+                        // カードがクリックされたときの処理
+                        selectBingoCard(doc.id);
+                    });
+                    bingoList.appendChild(bingoCard);
+                    bingoList.appendChild(document.createElement('br')); // 改行を追加
                 });
-                displayBingoCard(currentIndex);
             })
             .catch((error) => {
                 console.error('Error getting documents: ', error);
             });
         }
 
-        function displayBingoCard(index) {
-            const bingoList = document.getElementById('bingoList');
-            bingoList.innerHTML = '';
-            const bingoCard = document.createElement('div');
-            bingoCard.className = 'bingo-card';
-            bingoCard.textContent = `Name: ${bingoCards[index].id}`;
-            bingoCard.addEventListener('click', () => {
-                selectBingoCard(bingoCards[index].id);
-            });
-            bingoList.appendChild(bingoCard);
-        }
-
         // ビンゴカードが選択されたときの処理
         function selectBingoCard(docId) {
+            // FirebaseからドキュメントIDに対応するデータを取得する
             db.collection('BINGOApp').doc(docId).get()
             .then((doc) => {
                 if (doc.exists) {
+                    // ドキュメントが存在する場合、Registration.htmlに遷移してデータを表示する
                     const data = doc.data();
+                    // ドキュメントIDとデータをRegistration.htmlに渡して表示する処理を追加する
                     redirectToRegistrationPage(docId, data);
                 } else {
                     console.error('No such document!');
@@ -124,6 +119,19 @@
                 console.error('Error getting document:', error);
             });
         }
+
+        // Registration.htmlに遷移してドキュメントIDを伝える関数
+        function redirectToRegistrationPage(docId, data) {
+            // Registration.htmlに遷移してドキュメントIDを伝える関数
+            localStorage.setItem('selectedBingoCardId', docId);
+            localStorage.setItem('selectedBingoCardData', JSON.stringify(data));
+            location.href = './Edit.html';
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBingoCards();
+        });
+
 
         // input.htmlに遷移してデータを表示する関数
         function redirectToRegistrationPage(docId, data) {
