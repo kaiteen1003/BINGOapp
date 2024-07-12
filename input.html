@@ -172,7 +172,7 @@
                 <input class="square-textbox textbox-25" type="number" id="numeric"></input>
                 <button id="rightArrow" class="arrow-button" onclick="moveRight()">→</button>
                 <form class="input-form" onsubmit="return handleFormSubmit(event)">
-                    <input type="number" class="input-number" name="numeric" min="1" max="75">
+                    <input type="number" class="input-number" id="input_num" min="1" max="75">
                     <button type="submit" class="input-submit">入力</button>
                     <p class="input-output" id="arrayOutput"></p>
                 </form>
@@ -193,47 +193,51 @@
         });
 
         const db = firebase.firestore();
+        let grid = [];
 
         document.addEventListener('DOMContentLoaded', function() {
             const docId = localStorage.getItem('selectedBingoCardId');
             const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
-            var numdata=new Array(25);
+            var numdata = new Array(25);
 
             if (docId && data) {
                 const textboxes = document.querySelectorAll('.square-textbox');
                 textboxes.forEach((textbox, index) => {
                 textbox.value = data.values[index] || '';
+                grid.push([textbox.value, (textbox.value === '' ? '1': '0')]);
                 }); 
+                console.log(grid);
                 alert(textboxes[0]);
             
                 numdata=textboxes;
-                for(let x=0; x<3; x++){
-                        alert('このデータは' +numdata[x]+ 'です。');
-                    } 
+                // for(let x=0; x<3; x++){
+                //         alert('このデータは' +numdata[x]+ 'です。');
+                //     } 
             } else {
                 console.log('No document ID or data found in localStorage.');
             }
 
-            document.querySelector('#registerButton').addEventListener('click', function() {
-                const textboxes = document.querySelectorAll('.square-textbox');
-                let values = [];
-                textboxes.forEach(textbox => {
-                    values.push(textbox.value);
-                });
+            //不必要部分(?)
+            // document.querySelector('#registerButton').addEventListener('click', function() {
+            //     const textboxes = document.querySelectorAll('.square-textbox');
+            //     let values = [];
+            //     textboxes.forEach(textbox => {
+            //         values.push(textbox.value);
+            //     });
 
-                db.collection('BINGOApp').doc(docId).update({
-                    values: values,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                })
-                .then(function() {
-                    console.log('Document updated successfully.');
-                    alert(docId + 'の更新が完了しました。');
-                })
-                .catch(function(error) {
-                    console.error('Error updating document:', error);
-                    alert('更新に失敗しました: ' + error.message);
-                });
-            });
+            //     db.collection('BINGOApp').doc(docId).update({
+            //         values: values,
+            //         timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            //     })
+            //     .then(function() {
+            //         console.log('Document updated successfully.');
+            //         alert(docId + 'の更新が完了しました。');
+            //     })
+            //     .catch(function(error) {
+            //         console.error('Error updating document:', error);
+            //         alert('更新に失敗しました: ' + error.message);
+            //     });
+            // });
 
             if (localStorage.getItem('numbersArray')) {
                 numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
@@ -245,7 +249,7 @@
 
         function handleFormSubmit(event) {
             event.preventDefault();
-            var numeric = document.getElementById("numeric").value;
+            var numeric = document.getElementById("input_num").value;
             if (numeric !== "") {
                 numbersArray.push(Number(numeric));
                 localStorage.setItem('numbersArray', JSON.stringify(numbersArray));
@@ -253,11 +257,18 @@
                 document.getElementById('numeric').value = '';
             }
             for(let x=0; x<25; x++){
-                if(numdata[x] == numeric){
-                numdata[x] = 0;
-                alert(numdata[x] + 'に穴をあけました。');
+                if(grid[x][0] == numeric){
+                grid[x][1] = 1;
+                alert(grid[x][0] + 'に穴をあけました。');
                 }
             } 
+
+            // for(let x=0; x<25; x++){
+            //     if(numdata[x] == numeric){
+            //     numdata[x] = 0;
+            //     alert(numdata[x] + 'に穴をあけました。');
+            //     }
+            // } 
             return true;
         }
     </script>
