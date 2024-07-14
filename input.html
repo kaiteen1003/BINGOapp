@@ -19,11 +19,10 @@
             height: 500px; /* 画像の高さ */
             margin: 0 20px;
         }
-
         .container img {
             display: block;
-            width: 400px;
-            height: 500px;
+            width: auto; /* 幅を自動調整 */
+            height: 100%; /* 高さを100%にして親要素に合わせる */
         }
 
         .square-textbox {
@@ -93,7 +92,14 @@
             margin-top: 10px; /* Adjust margin as needed */
             font-size: 14px; /* Adjust font size */
         }
-
+        .bingo-label {
+            position: absolute;
+            top: 10px; /* 適切な位置に調整 */
+            left: 130px; /* 適切な位置に調整 */
+            font-size: 18px; /* 文字サイズを適宜調整 */
+            color: red; /* 文字色を適宜調整 */
+            display:none;
+        }
         /* テキストボックスの配置（画像のピクセル座標で指定） */
 
         
@@ -143,8 +149,12 @@
                 <button class="card-button" onclick="location.href='./Select.html'">カード選択に戻る</button>
             </div>
             <div class="container">
+                <label class="bingo-label">すでにBINGOしています</label>
+
                 <button class="arrow-button" id="leftArrow" >←</button>
                 <img src="picture/BINGOcard.JPG" alt="BINGO Card">
+
+
                 <input class="square-textbox textbox-1" type="number" id="numeric1"></input>
                 <input class="square-textbox textbox-2" type="number" id="numeric2"></input>
                 <input class="square-textbox textbox-3" type="number" id="numeric3"></input>
@@ -205,6 +215,9 @@
         let maxValuesIndex = 1; //valuesいくらまであるかの変数
         let storedDocID = null; //ひとつ前の画面から持ってきたドキュメントID
         const BINGOnum = [];//BINGOで発表された番号格納配列
+        // ラベルを取得
+        const bingoLabel = document.querySelector('.bingo-label');
+        let bingoStatus = Array(maxValuesIndex).fill(0);    // 各BINGOカードのBINGO判定の状態を管理する配列
         const db = firebase.firestore();
         
 
@@ -226,27 +239,28 @@
         */
 
 
-
         // allValuesとBINGOnumの値を比較して、対応するallValues_2tiを更新する関数
         function updateAllValues_2ti() {
-            // currentValuesIndexに対応するvaluesContentsを取得
-            const valuesIndex = `values${currentValuesIndex}`;
-            const valuesContents = allValues[valuesIndex];
-            
-            // 対応するallValues_2tiを取得
-            const allValues_2tiContents = allValues_2ti[valuesIndex];
+            for (let k = 1; k <= maxValuesIndex; k++) {
+                const valuesIndex = `values${k}`;
+                const valuesContents = allValues[valuesIndex];
 
-            // valuesContentsとBINGOnumの値を比較してallValues_2tiを更新
-            valuesContents.forEach((number, index) => {
-                if (index === 12) {
-                    allValues_2tiContents[index] = 1; // 13番目の要素を1で初期化
-                } else if (BINGOnum.includes(number)) {
-                    allValues_2tiContents[index] = 1; // BINGOnumに含まれる場合は1をセット
-                } else {
-                    allValues_2tiContents[index] = 0; // 含まれない場合は0をセット
-                }
-            });
+                // 対応するallValues_2tiを取得
+                const allValues_2tiContents = allValues_2ti[valuesIndex];
+
+                // valuesContentsとBINGOnumの値を比較してallValues_2tiを更新
+                valuesContents.forEach((number, index) => {
+                    if (index === 12) {
+                        allValues_2tiContents[index] = 1; // 13番目の要素を1で初期化
+                    } else if (BINGOnum.includes(number)) {
+                        allValues_2tiContents[index] = 1; // BINGOnumに含まれる場合は1をセット
+                    } else {
+                        allValues_2tiContents[index] = 0; // 含まれない場合は0をセット
+                    }
+                });
+            }
         }
+
 
 
 
@@ -257,6 +271,7 @@
             if (storedDocID) {
                 fetchFirestoreData(storedDocID).then(() => {
                     updatePageInfo();
+                    bingoStatus = Array(maxValuesIndex).fill(0);  
                 });
             } else {
                 alert(`Document IDが読み込めていません`);
@@ -398,15 +413,22 @@
             if (numberInput) {
                 const number = numberInput.value;
                 if (number) {
-                    BINGOnum.push(number);
+                    if (!BINGOnum.includes(number)) {
+                        BINGOnum.push(number);
 
-                    // BINGOnum配列の内容を表示
-                    output.textContent = "入力された数字：" + BINGOnum.join(", ");
+                        // BINGOnum配列の内容を表示
+                        output.textContent = "入力された数字：" + BINGOnum.join(", ");
 
-                    // 数字が一致する.square-textboxの背景色を変更する
-                    highlightMatchingTextboxes();
-                    updateAllValues_2ti()
-                    checkBingo()
+                        // 数字が一致する.square-textboxの背景色を変更する
+                        highlightMatchingTextboxes();
+                        updateAllValues_2ti();
+                        checkBingo();
+                        console.log(allValues_2ti);
+                        toggleBingoLabel()
+                        console.log(bingoStatus);
+                    } else {
+                        alert("この数字はすでに入力されています。");
+                    }
                 }
             }
         });
@@ -437,7 +459,7 @@
                 updateTextBoxValues();
                 highlightMatchingTextboxes();
                 updatePageInfo();
-
+                toggleBingoLabel()
             }
         });
 
@@ -452,10 +474,22 @@
                 updateTextBoxValues();
                 highlightMatchingTextboxes();
                 updatePageInfo();
+                toggleBingoLabel()
 
             }
         });
-
+        
+        // BINGO状態を切り替える関数
+        function toggleBingoLabel() {
+            console.log(bingoStatus);
+            if (bingoStatus[currentValuesIndex-1]===1) {
+                bingoLabel.style.display = 'block'; // BINGOしている場合、表示
+                console.log("test");
+            } 
+            else {
+        bingoLabel.style.display = 'none'; // BINGOしていない場合、非表示
+    }
+        }
 
         function handleFormSubmit(event) {
             event.preventDefault();
@@ -477,64 +511,81 @@
 
         // BINGOの判定を行う関数
         function checkBingo() {
-            // 横列のチェック
-            for (let i = 0; i < 5; i++) {
+            for (let k = 1; k <= maxValuesIndex; k++) {
+                // もし既にBINGO判定が行われたカードであればスキップ
+                if (bingoStatus[k - 1] === 1) {
+                    continue;
+                }
+
+                const valuesIndex = `values${k}`;
+                const valuesContents = allValues_2ti[valuesIndex];
+
+                // 横列のチェック
                 let rowComplete = true;
-                for (let j = 0; j < 5; j++) {
-                    if (allValues_2ti[`values${currentValuesIndex}`][i * 5 + j] !== 1) {
-                        rowComplete = false;
-                        break;
+                for (let i = 0; i < 5; i++) {
+                    for (let j = 0; j < 5; j++) {
+                        if (valuesContents[i * 5 + j] !== 1) {
+                            rowComplete = false;
+                            break;
+                        }
                     }
+                    if (rowComplete) {
+                        alert(`BINGO! 横列がそろいました。BINGOカード${k}枚目`);
+                        bingoStatus[k - 1] = 1; // BINGOしたカードの状態を更新
+                        return true;
+                    }
+                    rowComplete = true; // 行が揃わなかった場合、次の行のチェックへ進むためにリセット
                 }
-                if (rowComplete) {
-                    alert("BINGO! 横列がそろいました。");
-                    return true;
-                }
-            }
 
-            // 縦列のチェック
-            for (let i = 0; i < 5; i++) {
+                // 縦列のチェック
                 let columnComplete = true;
-                for (let j = 0; j < 5; j++) {
-                    if (allValues_2ti[`values${currentValuesIndex}`][j * 5 + i] !== 1) {
-                        columnComplete = false;
+                for (let i = 0; i < 5; i++) {
+                    for (let j = 0; j < 5; j++) {
+                        if (valuesContents[j * 5 + i] !== 1) {
+                            columnComplete = false;
+                            break;
+                        }
+                    }
+                    if (columnComplete) {
+                        alert(`BINGO! 縦列がそろいました。BINGOカード${k}枚目`);
+                        bingoStatus[k - 1] = 1; // BINGOしたカードの状態を更新
+                        return true;
+                    }
+                    columnComplete = true; // 列が揃わなかった場合、次の列のチェックへ進むためにリセット
+                }
+
+                // 斜めのチェック（左上から右下）
+                let diagonalComplete1 = true;
+                for (let i = 0; i < 5; i++) {
+                    if (valuesContents[i * 5 + i] !== 1) {
+                        diagonalComplete1 = false;
                         break;
                     }
                 }
-                if (columnComplete) {
-                    alert("BINGO! 縦列がそろいました。");
+                if (diagonalComplete1) {
+                    alert(`BINGO! 斜めがそろいました。BINGOカード${k}枚目`);
+                    bingoStatus[k - 1] = 1; // BINGOしたカードの状態を更新
                     return true;
                 }
-            }
 
-            // 斜めのチェック（左上から右下）
-            let diagonalComplete1 = true;
-            for (let i = 0; i < 5; i++) {
-                if (allValues_2ti[`values${currentValuesIndex}`][i * 5 + i] !== 1) {
-                    diagonalComplete1 = false;
-                    break;
+                // 斜めのチェック（右上から左下）
+                let diagonalComplete2 = true;
+                for (let i = 0; i < 5; i++) {
+                    if (valuesContents[i * 5 + (4 - i)] !== 1) {
+                        diagonalComplete2 = false;
+                        break;
+                    }
                 }
-            }
-            if (diagonalComplete1) {
-                alert("BINGO! 斜めがそろいました。");
-                return true;
-            }
-
-            // 斜めのチェック（右上から左下）
-            let diagonalComplete2 = true;
-            for (let i = 0; i < 5; i++) {
-                if (allValues_2ti[`values${currentValuesIndex}`][i * 5 + (4 - i)] !== 1) {
-                    diagonalComplete2 = false;
-                    break;
+                if (diagonalComplete2) {
+                    alert(`BINGO! 斜めがそろいました。BINGOカード${k}枚目`);
+                    bingoStatus[k - 1] = 1; // BINGOしたカードの状態を更新
+                    return true;
                 }
-            }
-            if (diagonalComplete2) {
-                alert("BINGO! 斜めがそろいました。");
-                return true;
             }
 
             return false;
         }
+
         /*
         直すところ
         ・カードを表示していないとなぜかBINGOアラートが出ない
