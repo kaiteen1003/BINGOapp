@@ -6,6 +6,57 @@
     <title>BINGO Check</title>
     <link rel="stylesheet" href="style.css">
 </head>
+    <style>
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            text-shadow: 1px 1px 0px #03ffb3,
+            2px 2px 0px #1ff89e,
+            3px 3px 0px #14d5dc,
+            4px 4px 0px #028a83;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            text-align: center;
+        }
+
+        .bingo-card {
+            border: 1px solid #000;
+            margin: 10px;
+            padding: 10px;
+            cursor: pointer;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+        }
+
+        .bingo-card:hover {
+            background-color: #70f5bd;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .nav-button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            cursor: pointer;
+        }
+
+        .back-button, .home-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
 <body class="Select">
     <div class="container">
         <h1>フォルダを選択してください</h1>
@@ -25,6 +76,8 @@
         });
 
         const db = firebase.firestore();
+        let currentIndex = 0;
+        let bingoCards = [];
 
         // ビンゴカード一覧を取得して表示
         function loadBingoCards() {
@@ -67,53 +120,47 @@
             });
         }
 
-        // input.htmlに遷移してデータを表示する関数
+        // Registration.htmlに遷移してドキュメントIDを伝える関数
         function redirectToRegistrationPage(docId, data) {
-            // ドキュメントIDとデータをLocalStorageに保存して、Registration.htmlに遷移する
+            // Registration.htmlに遷移してドキュメントIDを伝える関数
             localStorage.setItem('selectedBingoCardId', docId);
             localStorage.setItem('selectedBingoCardData', JSON.stringify(data));
-            location.href = './input.html';
+            location.href = './Edit.html';
         }
 
         document.addEventListener('DOMContentLoaded', function() {
             loadBingoCards();
         });
+
+
+        // input.htmlに遷移してデータを表示する関数
+        function redirectToRegistrationPage(docId, data) {
+            localStorage.setItem('selectedBingoCardId', docId);
+            localStorage.setItem('selectedBingoCardData', JSON.stringify(data));
+            location.href = './input.html';
+        }
+
+        function navigateBingoCards(direction) {
+            if (direction === 'next' && currentIndex < bingoCards.length - 1) {
+                currentIndex++;
+            } else if (direction === 'prev' && currentIndex > 0) {
+                currentIndex--;
+            }
+            displayBingoCard(currentIndex);
+        }
+
+        document.getElementById('right-arrow').addEventListener('click', () => {
+            navigateBingoCards('next');
+        });
+
+        document.getElementById('left-arrow').addEventListener('click', () => {
+            navigateBingoCards('prev');
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadBingoCards();
+        });
     </script>
-    <style>
-        h1{
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-            text-shadow: 1px 1px 0px #03ffb3,
-            2px 2px 0px #1ff89e,
-            3px 3px 0px #14d5dc,
-            4px 4px 0px #028a83;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            text-align: center;
-        }
 
-        .bingo-card {
-            border: 1px solid #000;
-            margin: 10px;
-            padding: 10px;
-            cursor: pointer;
-            background-color: #f9f9f9;
-            transition: background-color 0.3s ease;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
-        }
-
-        .bingo-card:hover {
-            background-color: #70f5bd;
-        }
-
-        .back-button {
-            margin-top: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-        }
-    </style>
 </body>
 </html>

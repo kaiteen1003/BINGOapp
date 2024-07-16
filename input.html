@@ -15,21 +15,20 @@
 
         .container {
             position: relative;
-            width: 500px; /* 画像の幅 */
+            width: 1000px; /* 画像の幅 */
             height: 500px; /* 画像の高さ */
             margin: 0 20px;
         }
-
         .container img {
             display: block;
-            width: 80%;
-            height: 100%;
+            width: auto; /* 幅を自動調整 */
+            height: 100%; /* 高さを100%にして親要素に合わせる */
         }
 
         .square-textbox {
             position: absolute;
-            width: 10%; /* 画像サイズに応じた幅 */
-            height: 10%; /* 画像サイズに応じた高さ */
+            width: 55px; /* 画像サイズに応じた幅 */
+            height: 55px; /* 画像サイズに応じた高さ */
             resize: none;
             box-sizing: border-box;
             font-size: 36px;
@@ -43,38 +42,95 @@
             white-space: nowrap; /* 改行を防ぐ */
             line-height: 1; /* 行の高さを調整して改行を防ぐ */
         }
+        
+        .arrow-button {
+            font-size: 20px;
+            background-color: rgb(200, 200, 200);
+            border: 1px solid #000;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        #leftArrow {
+            left: 0;
 
-        /* テキストボックスの配置 */
-        .textbox-1 { top: 30.5%; left: 13.5%; }
-        .textbox-2 { top: 30.5%; left: 25%; }
-        .textbox-3 { top: 30.5%; left: 36.5%; }
-        .textbox-4 { top: 30.5%; left: 48%; }
-        .textbox-5 { top: 30.5%; left: 59.5%; }
+        }
 
-        .textbox-6 { top: 42%; left: 13.5%; }
-        .textbox-7 { top: 42%; left: 25%;}
-        .textbox-8 { top: 42%; left: 36.5%; }
-        .textbox-9 { top: 42%; left: 48%; }
-        .textbox-10 { top: 42%; left: 59.5%; }
+        #rightArrow {
+            left: 400px;
 
-        .textbox-11 { top: 53.5%; left: 13.5%; }
-        .textbox-12 { top: 53.5%; left: 25%;}
-        .textbox-13 { top: 53.5%; left: 36.5%; display: none; } /* 中央のテキストボックスを非表示にする */
-        .textbox-14 { top: 53.5%; left: 48%; }
-        .textbox-15 { top: 53.5%; left: 59.5%; }
+        }
 
-        .textbox-16 { top: 65%; left: 13.5%; }
-        .textbox-17 { top: 65%; left: 25%; }
-        .textbox-18 { top: 65%; left: 36.5%; }
-        .textbox-19 { top: 65%; left: 48%; }
-        .textbox-20 { top: 65%; left: 59.5%; }
+        .input-form {
+            position: absolute;
 
-        .textbox-21 { top: 76.5%; left: 13.5%; }
-        .textbox-22 { top: 76.5%; left: 25%; }
-        .textbox-23 { top: 76.5%; left: 36.5%; }
-        .textbox-24 { top: 76.5%; left: 48%;}
-        .textbox-25 { top: 76.5%; left: 59.5%; }
+        margin-top: 20px; /* Adjust as needed */
+        left: 600px;
+        top:300px
+        }
 
+        .input-number {
+            width: 200px; /* Adjust width as needed */
+            padding: 5px;
+            margin-bottom: 10px; /* Adjust spacing between inputs */
+            font-size: 16px; /* Adjust font size */
+    
+        
+        }
+
+        .input-submit,.back-number {
+            padding: 8px 15px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 16px; /* Adjust font size */
+        }
+
+        .input-output {
+            margin-top: 10px; /* Adjust margin as needed */
+            font-size: 14px; /* Adjust font size */
+        }
+        .bingo-label {
+            position: absolute;
+            top: 10px; /* 適切な位置に調整 */
+            left: 130px; /* 適切な位置に調整 */
+            font-size: 18px; /* 文字サイズを適宜調整 */
+            color: red; /* 文字色を適宜調整 */
+            display:none;
+        }
+        /* テキストボックスの配置（画像のピクセル座標で指定） */
+
+        
+        .textbox-1 { top:  177.5px;  left: 77.5px; } /* 画像の高さの30.5% + 20px、幅の13.5% + 10px */
+        .textbox-2 { top: 177.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの30.5% + 20px、幅の25% + 10px */
+        .textbox-3 { top:  177.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの30.5% + 20px、幅の36.5% + 10px */
+        .textbox-4 { top:  177.5px;  left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの30.5% + 20px、幅の48% + 10px */
+        .textbox-5 { top:  177.5px;  left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの30.5% + 20px、幅の59.5% + 10px */
+
+        .textbox-6 { top: 245.5px; left: 77.5px; } /* 画像の高さの42% + 20px、幅の13.5% + 10px */
+        .textbox-7 { top: 245.5px;left: calc(77.5px + 67.5px); } /* 画像の高さの42% + 20px、幅の25% + 10px */
+        .textbox-8 { top:245.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの42% + 20px、幅の36.5% + 10px */
+        .textbox-9 { top: 245.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの42% + 20px、幅の48% + 10px */
+        .textbox-10 { top: 245.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの42% + 20px、幅の59.5% + 10px */
+        .textbox-11 { top: 313.5px; left: 77.5px; } /* 画像の高さの53.5% + 20px、幅の13.5% + 10px */
+        .textbox-12 { top: 313.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの53.5% + 20px、幅の25% + 10px */
+        .textbox-13 { top: 313.5px; left: calc(77.5px + (67.5px * 2)); display: none; } /* 中央のテキストボックスを非表示にする */
+        .textbox-14 { top: 313.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの53.5% + 20px、幅の48% + 10px */
+        .textbox-15 { top: 313.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの53.5% + 20px、幅の59.5% + 10px */
+
+        .textbox-16 { top: 381.5px; left: 77.5px; } /* 画像の高さの65% + 20px、幅の13.5% + 10px */
+        .textbox-17 { top: 381.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの65% + 20px、幅の25% + 10px */
+        .textbox-18 { top: 381.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの65% + 20px、幅の36.5% + 10px */
+        .textbox-19 { top: 381.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの65% + 20px、幅の48% + 10px */
+        .textbox-20 { top: 381.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの65% + 20px、幅の59.5% + 10px */
+
+        .textbox-21 { top: 445.5px; left: 77.5px; } /* 画像の高さの76.5% + 20px、幅の13.5% + 10px */
+        .textbox-22 { top:445.5px; left: calc(77.5px + 67.5px); } /* 画像の高さの76.5% + 20px、幅の25% + 10px */
+        .textbox-23 { top: 445.5px; left: calc(77.5px + (67.5px * 2)); } /* 画像の高さの76.5% + 20px、幅の36.5% + 10px */
+        .textbox-24 { top: 445.5px; left: calc(77.5px + (67.5px * 3)); } /* 画像の高さの76.5% + 20px、幅の48% + 10px */
+        .textbox-25 { top: 445.5px; left: calc(77.5px + (67.5px * 4)); } /* 画像の高さの76.5% + 20px、幅の59.5% + 10px */
         .form-container{
             margin: 0 20px;
             display: flex;
@@ -87,42 +143,54 @@
     <main>
         <div class="main-container">
             <div class="form-container">
-                <form onsubmit="return handleFormSubmit(event)">
-                    <input type="number" id="numeric" name="numeric" min="1" max="75"></input>
-                    <button type="submit">入力</button>
-                    <p id="arrayOutput"></p>
-                </form>
+
                 <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
                 <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
                 <button class="card-button" onclick="location.href='./Select.html'">カード選択に戻る</button>
             </div>
             <div class="container">
+                <label class="bingo-label">すでにBINGOしています</label>
+
+                <button class="arrow-button" id="leftArrow" >←</button>
                 <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-                <input class="square-textbox textbox-1" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-2" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-3" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-4" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-5" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-6" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-7" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-8" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-9" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-10" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-11" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-12" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-13" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-14" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-15" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-16" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-17" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-18" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-19" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-20" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-21" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-22" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-23" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-24" type="number" id="numeric"></input>
-                <input class="square-textbox textbox-25" type="number" id="numeric"></input>
+
+
+                <input class="square-textbox textbox-1" type="number" id="numeric1"></input>
+                <input class="square-textbox textbox-2" type="number" id="numeric2"></input>
+                <input class="square-textbox textbox-3" type="number" id="numeric3"></input>
+                <input class="square-textbox textbox-4" type="number" id="numeric4"></input>
+                <input class="square-textbox textbox-5" type="number" id="numeric5"></input>
+                <input class="square-textbox textbox-6" type="number" id="numeric6"></input>
+                <input class="square-textbox textbox-7" type="number" id="numeric7"></input>
+                <input class="square-textbox textbox-8" type="number" id="numeric8"></input>
+                <input class="square-textbox textbox-9" type="number" id="numeric9"></input>
+                <input class="square-textbox textbox-10" type="number" id="numeric10"></input>
+                <input class="square-textbox textbox-11" type="number" id="numeric11"></input>
+                <input class="square-textbox textbox-12" type="number" id="numeric12"></input>
+                <input class="square-textbox textbox-13" type="number" id="numeric13"></input>
+                <input class="square-textbox textbox-14" type="number" id="numeric14"></input>
+                <input class="square-textbox textbox-15" type="number" id="numeric15"></input>
+                <input class="square-textbox textbox-16" type="number" id="numeric16"></input>
+                <input class="square-textbox textbox-17" type="number" id="numeric17"></input>
+                <input class="square-textbox textbox-18" type="number" id="numeric18"></input>
+                <input class="square-textbox textbox-19" type="number" id="numeric19"></input>
+                <input class="square-textbox textbox-20" type="number" id="numeric20"></input>
+                <input class="square-textbox textbox-21" type="number" id="numeric21"></input>
+                <input class="square-textbox textbox-22" type="number" id="numeric22"></input>
+                <input class="square-textbox textbox-23" type="number" id="numeric23"></input>
+                <input class="square-textbox textbox-24" type="number" id="numeric24"></input>
+                <input class="square-textbox textbox-25" type="number" id="numeric25"></input>
+                <button id="rightArrow" class="arrow-button" >→</button>               
+                <form class="input-form" onsubmit="return handleFormSubmit(event)">
+                    <span id="pageInfo"></span> <!-- 現在のページ数を表示する部分 -->
+                    <input type="number" class="input-number" id="numeric" name="numeric" min="1" max="75">
+                    <button type="submit" class="input-submit">入力</button>
+                    <p class="input-output" id="arrayOutput"></p>
+                    <div id="output" class="input-output"></div>
+                    <button type="submit" class="back-number">一つ戻す</button>
+                </form>
+                
+                
             </div>
         </div>
         
@@ -131,63 +199,297 @@
     <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
 
     <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.2/firebase-firestore-compat.js"></script>    
     <script>
+        //firebaseのAPIキー(最初に書くのが望ましい)
         firebase.initializeApp({
             apiKey: "AIzaSyBFglLx2pDfHSpyEUUpn0c939BWS1vmzQg",
             projectId: "bingoapp-8c5c0",
         });
 
+
+        // グローバル変数群
+        let allValues = {};//firebaseから持ってきた配列をまとめて格納している
+        let allValues_2ti = {}; // 空のオブジェクトで初期化
+        let currentValuesIndex = 1;//現在カードが何枚目かのカウント変数
+        let maxValuesIndex = 1; //valuesいくらまであるかの変数
+        let storedDocID = null; //ひとつ前の画面から持ってきたドキュメントID
+        const BINGOnum = [];//BINGOで発表された番号格納配列
+        // ラベルを取得
+        const bingoLabel = document.querySelector('.bingo-label');
+        let bingoStatus = Array(maxValuesIndex).fill(0);    // 各BINGOカードのBINGO判定の状態を管理する配列
         const db = firebase.firestore();
+        
 
+
+       
+        /* 
+        allValuesについて
+
+            ex)　values1の内容の取り出し
+                  　const values1Contents = allValues['values1'];
+
+            ex) 　現在表示しているカードでの処理
+                    const valuesIndex = `values${currentValuesIndex}`;
+                    const valuesContents = allValues[valuesIndex];
+
+
+             連想配列で定義しているのでこんな感じで取り出してね。
+
+        */
+
+
+        // allValuesとBINGOnumの値を比較して、対応するallValues_2tiを更新する関数
+        function updateAllValues_2ti() {
+            for (let k = 1; k <= maxValuesIndex; k++) {
+                const valuesIndex = `values${k}`;
+                const valuesContents = allValues[valuesIndex];
+
+                // 対応するallValues_2tiを取得
+                const allValues_2tiContents = allValues_2ti[valuesIndex];
+
+                // valuesContentsとBINGOnumの値を比較してallValues_2tiを更新
+                valuesContents.forEach((number, index) => {
+                    if (index === 12) {
+                        allValues_2tiContents[index] = 1; // 13番目の要素を1で初期化
+                    } else if (BINGOnum.includes(number)) {
+                        allValues_2tiContents[index] = 1; // BINGOnumに含まれる場合は1をセット
+                    } else {
+                        allValues_2tiContents[index] = 0; // 含まれない場合は0をセット
+                    }
+                });
+            }
+        }
+
+
+
+
+        //document.addEventListener->画面が起動したら動く関数
         document.addEventListener('DOMContentLoaded', function() {
-            const docId = localStorage.getItem('selectedBingoCardId');
-            const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
-            var numdata=new Array(25);
-
-            if (docId && data) {
-                const textboxes = document.querySelectorAll('.square-textbox');
-                textboxes.forEach((textbox, index) => {
-                textbox.value = data.values[index] || '';
-                }); 
-                alert(textboxes[0]);
-            
-                numdata=textboxes;
-                for(let x=0; x<3; x++){
-                        alert('このデータは' +numdata[x]+ 'です。');
-                    } 
+            // ローカルストレージからドキュメントIDを取得してグローバル変数に格納
+            storedDocID = localStorage.getItem('selectedBingoCardId');
+            if (storedDocID) {
+                fetchFirestoreData(storedDocID).then(() => {
+                    updatePageInfo();
+                    bingoStatus = Array(maxValuesIndex).fill(0);  
+                });
             } else {
-                console.log('No document ID or data found in localStorage.');
+                alert(`Document IDが読み込めていません`);
             }
 
-            document.querySelector('#registerButton').addEventListener('click', function() {
+            
+
+        });
+
+
+        // BINGOカードの状態配列を初期化する関数（13番目の要素を1で初期化）
+        function initializeStatusArrays(maxValuesIndex) {
+            let allStatusArrays = {};
+            for (let i = 1; i <= maxValuesIndex; i++) {
+                let statusArray = Array(25).fill(0); // 25個の要素を0で初期化
+                statusArray[12] = 1; // 13番目の要素を1で初期化
+                allStatusArrays[`values${i}`] = statusArray;
+            }
+            return allStatusArrays;
+        }
+
+        // Firestoreからデータを取得する関数
+        function fetchFirestoreData(storedDocID) {
+            return db.collection('BINGOApp').doc(storedDocID).get().then((doc) => {
+                if (doc.exists) {
+                    const data = doc.data();
+                    console.log("data"+data);
+                    // values1, values2, values3, ... というプロパティを持つデータを取得してallValuesに格納
+                    while (data.hasOwnProperty(`values${maxValuesIndex}`)) {
+                        allValues[`values${maxValuesIndex}`] = data[`values${maxValuesIndex}`];
+                        maxValuesIndex++;
+                    }
+                    maxValuesIndex-=1;
+                    // currentValuesIndexが上限を超えないように調整
+                    if (currentValuesIndex > maxValuesIndex) {
+                        currentValuesIndex = maxValuesIndex;
+                    }
+
+                    console.log(allValues); // 確認用：allValuesの内容をコンソールに出力
+
+                    // テキストボックスに値を設定する
+                    const textboxes = document.querySelectorAll('.square-textbox');
+                    textboxes.forEach((textbox, index) => {
+                        textbox.value = allValues['values1'][index] || ''; // 空文字列でない場合のみ設定
+                    });
+                    allValues_2ti = initializeStatusArrays(maxValuesIndex);
+
+                    console.log(allValues_2ti);  // コンソールに出力して確認
+                } else {
+                    console.error('No such document!');
+                }
+            }).catch((error) => {
+                console.error('Error getting document:', error);
+            });
+        }
+
+
+        // allValuesを更新する関数
+        function updateAllValues() {
+            return new Promise((resolve, reject) => {
                 const textboxes = document.querySelectorAll('.square-textbox');
                 let values = [];
                 textboxes.forEach(textbox => {
                     values.push(textbox.value);
                 });
 
-                db.collection('BINGOApp').doc(docId).update({
-                    values: values,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                })
-                .then(function() {
-                    console.log('Document updated successfully.');
-                    alert(docId + 'の更新が完了しました。');
-                })
-                .catch(function(error) {
-                    console.error('Error updating document:', error);
-                    alert('更新に失敗しました: ' + error.message);
-                });
-            });
+                // BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
+                const valuesIndex = `values${currentValuesIndex}`;
 
-            if (localStorage.getItem('numbersArray')) {
-                numbersArray = JSON.parse(localStorage.getItem('numbersArray'));
-                document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
+                // allValuesの該当部分を上書き
+                allValues[valuesIndex] = values;
+
+                // ログで確認
+                console.log(`Updated ${valuesIndex} in allValues:`, allValues[valuesIndex]);
+                
+                resolve();
+            });
+        }
+
+
+        // Firestoreからデータを取得して初期テキストボックスの値を設定する関数
+        function updateTextBoxValues() {
+            // BINGOカードが何枚目かを見てフィールド名を決める。(values1,2,3....)
+            const valuesIndex = `values${currentValuesIndex}`;
+
+            // allValuesから現在のページのvaluesを取得
+            const valuesContents = allValues[valuesIndex];
+
+            if (!valuesContents) {
+                console.error(`No data found for ${valuesIndex}`);
+                return;
+            }
+
+            // テキストボックスに値を設定する
+            const textboxes = document.querySelectorAll('.square-textbox');
+            textboxes.forEach((textbox, index) => {
+                textbox.value = valuesContents[index] || ''; // 空文字列でない場合のみ設定
+            });
+        }
+
+        // 数字が一致する.square-textboxの背景色をまとめて変更する関数
+        function highlightMatchingTextboxes() {
+            const valuesIndex = `values${currentValuesIndex}`;
+            const valuesContents = allValues[valuesIndex];
+
+            // すべての.square-textboxを取得
+            const allTextboxes = document.querySelectorAll('.square-textbox');
+            // すべての.square-textboxの背景色をリセット（白色にする）
+            allTextboxes.forEach((textbox, index) => {
+                textbox.style.backgroundColor = 'white';
+            });
+            // valuesContentsの数字とBINGOnumの数字を比較して、一致したら背景色を変更
+            valuesContents.forEach((number, index) => {
+                const textboxIndex = index + 1; // .square-textboxのインデックス（1から始まる）
+                const textbox = document.querySelector(`.textbox-${textboxIndex}`);
+
+                if (BINGOnum.includes(number)) {
+                    textbox.style.backgroundColor = 'lightyellow';
+                }
+            });
+        }
+
+
+        // 現在のページ数を表示する関数
+        function updatePageInfo() {
+            const pageInfo = document.getElementById('pageInfo');
+            pageInfo.textContent = `${currentValuesIndex}/${maxValuesIndex} 枚中`;
+        }
+
+
+
+        // 入力ボタンの処理
+        document.querySelector('.input-submit').addEventListener('click', function(event) {
+            event.preventDefault(); // submitボタンのデフォルトの動作を停止する
+
+            const numberInput = document.getElementById("numeric");
+            const output = document.getElementById("output");
+
+            if (numberInput) {
+                const number = numberInput.value;
+                if (number) {
+                    if (!BINGOnum.includes(number)) {
+                        BINGOnum.push(number);
+
+                        // BINGOnum配列の内容を表示
+                        output.textContent = "入力された数字：" + BINGOnum.join(", ");
+
+                        // 数字が一致する.square-textboxの背景色を変更する
+                        highlightMatchingTextboxes();
+                        updateAllValues_2ti();
+                        checkBingo();
+                        console.log(allValues_2ti);
+                        toggleBingoLabel()
+                        console.log(bingoStatus);
+                    } else {
+                        alert("この数字はすでに入力されています。");
+                    }
+                }
             }
         });
 
-        let numbersArray = [];
+
+
+        document.querySelector('.back-number').addEventListener('click', function(event) {
+            event.preventDefault(); // ボタンのデフォルトの動作を停止する
+
+            if (BINGOnum.length > 0) {
+                BINGOnum.pop(); // 配列の最後尾（最新の数字）を削除する
+
+                // 更新されたBINGOnum配列の内容を表示
+                const output = document.getElementById("output");
+                output.textContent = "入力された数字：" + BINGOnum.join(", ");
+            }
+        });
+
+
+        // 右矢印の処理
+        document.querySelector('#rightArrow').addEventListener('click', function() {
+            event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
+
+            // BINGOカードが最後なら右に進めない処理
+            if (currentValuesIndex < maxValuesIndex) {
+                updateAllValues()         
+                currentValuesIndex++;
+                updateTextBoxValues();
+                highlightMatchingTextboxes();
+                updatePageInfo();
+                toggleBingoLabel()
+            }
+        });
+
+        // 左矢印の処理
+        document.querySelector('#leftArrow').addEventListener('click', function() {
+            event.preventDefault(); // 関数実行後にリロードするsubmitボタンのデフォルト機能を止める。
+
+            // BINGOカードが一枚目なら左に進めない処理
+            if (currentValuesIndex > 1) {
+                updateAllValues()
+                currentValuesIndex--;
+                updateTextBoxValues();
+                highlightMatchingTextboxes();
+                updatePageInfo();
+                toggleBingoLabel()
+
+            }
+        });
+        
+        // BINGO状態を切り替える関数
+        function toggleBingoLabel() {
+            console.log(bingoStatus);
+            if (bingoStatus[currentValuesIndex-1]===1) {
+                bingoLabel.style.display = 'block'; // BINGOしている場合、表示
+                console.log("test");
+            } 
+            else {
+        bingoLabel.style.display = 'none'; // BINGOしていない場合、非表示
+    }
+        }
 
         function handleFormSubmit(event) {
             event.preventDefault();
@@ -206,6 +508,94 @@
             } 
             return true;
         }
+
+        // BINGOの判定を行う関数
+        function checkBingo() {
+            for (let k = 1; k <= maxValuesIndex; k++) {
+                // もし既にBINGO判定が行われたカードであればスキップ
+                if (bingoStatus[k - 1] === 1) {
+                    continue;
+                }
+
+                const valuesIndex = `values${k}`;
+                const valuesContents = allValues_2ti[valuesIndex];
+
+                // 横列のチェック
+                let rowComplete = true;
+                for (let i = 0; i < 5; i++) {
+                    for (let j = 0; j < 5; j++) {
+                        if (valuesContents[i * 5 + j] !== 1) {
+                            rowComplete = false;
+                            break;
+                        }
+                    }
+                    if (rowComplete) {
+                        alert(`BINGO! 横列がそろいました。BINGOカード${k}枚目`);
+                        bingoStatus[k - 1] = 1; // BINGOしたカードの状態を更新
+                        return true;
+                    }
+                    rowComplete = true; // 行が揃わなかった場合、次の行のチェックへ進むためにリセット
+                }
+
+                // 縦列のチェック
+                let columnComplete = true;
+                for (let i = 0; i < 5; i++) {
+                    for (let j = 0; j < 5; j++) {
+                        if (valuesContents[j * 5 + i] !== 1) {
+                            columnComplete = false;
+                            break;
+                        }
+                    }
+                    if (columnComplete) {
+                        alert(`BINGO! 縦列がそろいました。BINGOカード${k}枚目`);
+                        bingoStatus[k - 1] = 1; // BINGOしたカードの状態を更新
+                        return true;
+                    }
+                    columnComplete = true; // 列が揃わなかった場合、次の列のチェックへ進むためにリセット
+                }
+
+                // 斜めのチェック（左上から右下）
+                let diagonalComplete1 = true;
+                for (let i = 0; i < 5; i++) {
+                    if (valuesContents[i * 5 + i] !== 1) {
+                        diagonalComplete1 = false;
+                        break;
+                    }
+                }
+                if (diagonalComplete1) {
+                    alert(`BINGO! 斜めがそろいました。BINGOカード${k}枚目`);
+                    bingoStatus[k - 1] = 1; // BINGOしたカードの状態を更新
+                    return true;
+                }
+
+                // 斜めのチェック（右上から左下）
+                let diagonalComplete2 = true;
+                for (let i = 0; i < 5; i++) {
+                    if (valuesContents[i * 5 + (4 - i)] !== 1) {
+                        diagonalComplete2 = false;
+                        break;
+                    }
+                }
+                if (diagonalComplete2) {
+                    alert(`BINGO! 斜めがそろいました。BINGOカード${k}枚目`);
+                    bingoStatus[k - 1] = 1; // BINGOしたカードの状態を更新
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /*
+        直すところ
+        ・カードを表示していないとなぜかBINGOアラートが出ない
+        ・一回BINGOしたカードの0,1を-1にすべてして処理を止める
+        ・BINGO!の画面を作る
+        
+        */
+
     </script>
 </body>
 </html>
+
+
