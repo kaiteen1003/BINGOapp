@@ -440,7 +440,7 @@
 
             if (BINGOnum.length > 0) {
                 BINGOnum.pop(); // 配列の最後尾（最新の数字）を削除する
-
+                highlightMatchingTextboxes()
                 // 更新されたBINGOnum配列の内容を表示
                 const output = document.getElementById("output");
                 output.textContent = "入力された数字：" + BINGOnum.join(", ");
@@ -586,13 +586,7 @@
             return false;
         }
 
-        /*
-        直すところ
-        ・カードを表示していないとなぜかBINGOアラートが出ない
-        ・一回BINGOしたカードの0,1を-1にすべてして処理を止める
-        ・BINGO!の画面を作る
-        
-        */
+
 
     </script>
 </body>
