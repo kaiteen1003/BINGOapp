@@ -32,7 +32,7 @@
             height: 10%; /* 画像サイズに応じた高さ */
             resize: none;
             box-sizing: border-box;
-            font-size: 50px;
+            font-size: 36px;
             background-color: rgba(255, 255, 255, 0.8);
             border: 1px solid #000;
             display: flex;
@@ -83,11 +83,12 @@
         }
     </style>
 </head>
-<body>
+<body class="input">
     <main>
         <div class="main-container">
             <div class="form-container">
                 <form onsubmit="return handleFormSubmit(event)">
+<<<<<<< HEAD
                         <head>
                             <title>数値入力欄</title>
                             <style>
@@ -103,39 +104,43 @@
                         <body>
                              <input type="number" id="numeric" name="numeric" min="1" max="75" placeholder="数値を入力してください">
                         </body>
+=======
+                    <input type="number" id="numeric" name="numeric" min="1" max="75"></input>
+>>>>>>> 3fab6faecdc5e44c8890ee32fc733c2a7dea281d
                     <button type="submit">入力</button>
                     <p id="arrayOutput"></p>
                 </form>
                 <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
                 <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
+                <button class="card-button" onclick="location.href='./Select.html'">カード選択に戻る</button>
             </div>
             <div class="container">
                 <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-                <textarea class="square-textbox textbox-1"></textarea>
-                <textarea class="square-textbox textbox-2"></textarea>
-                <textarea class="square-textbox textbox-3"></textarea>
-                <textarea class="square-textbox textbox-4"></textarea>
-                <textarea class="square-textbox textbox-5"></textarea>
-                <textarea class="square-textbox textbox-6"></textarea>
-                <textarea class="square-textbox textbox-7"></textarea>
-                <textarea class="square-textbox textbox-8"></textarea>
-                <textarea class="square-textbox textbox-9"></textarea>
-                <textarea class="square-textbox textbox-10"></textarea>
-                <textarea class="square-textbox textbox-11"></textarea>
-                <textarea class="square-textbox textbox-12"></textarea>
-                <!-- 中央のフリースペースは空ける -->
-                <textarea class="square-textbox textbox-14"></textarea>
-                <textarea class="square-textbox textbox-15"></textarea>
-                <textarea class="square-textbox textbox-16"></textarea>
-                <textarea class="square-textbox textbox-17"></textarea>
-                <textarea class="square-textbox textbox-18"></textarea>
-                <textarea class="square-textbox textbox-19"></textarea>
-                <textarea class="square-textbox textbox-20"></textarea>
-                <textarea class="square-textbox textbox-21"></textarea>
-                <textarea class="square-textbox textbox-22"></textarea>
-                <textarea class="square-textbox textbox-23"></textarea>
-                <textarea class="square-textbox textbox-24"></textarea>
-                <textarea class="square-textbox textbox-25"></textarea>
+                <input class="square-textbox textbox-1" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-2" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-3" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-4" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-5" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-6" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-7" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-8" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-9" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-10" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-11" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-12" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-13" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-14" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-15" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-16" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-17" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-18" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-19" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-20" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-21" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-22" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-23" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-24" type="number" id="numeric"></input>
+                <input class="square-textbox textbox-25" type="number" id="numeric"></input>
             </div>
         </div>
         
@@ -156,12 +161,19 @@
         document.addEventListener('DOMContentLoaded', function() {
             const docId = localStorage.getItem('selectedBingoCardId');
             const data = JSON.parse(localStorage.getItem('selectedBingoCardData'));
+            var numdata=new Array(25);
 
             if (docId && data) {
                 const textboxes = document.querySelectorAll('.square-textbox');
                 textboxes.forEach((textbox, index) => {
-                    textbox.value = data.values[index] || '';
-                });
+                textbox.value = data.values[index] || '';
+                }); 
+                alert(textboxes[0]);
+            
+                numdata=textboxes;
+                for(let x=0; x<3; x++){
+                        alert('このデータは' +numdata[x]+ 'です。');
+                    } 
             } else {
                 console.log('No document ID or data found in localStorage.');
             }
@@ -204,6 +216,12 @@
                 document.getElementById('arrayOutput').innerText = 'これまでの番号：' + numbersArray.join(', ');
                 document.getElementById('numeric').value = '';
             }
+            for(let x=0; x<25; x++){
+                if(numdata[x] == numeric){
+                numdata[x] = 0;
+                alert(numdata[x] + 'に穴をあけました。');
+                }
+            } 
             return true;
         }
     </script>

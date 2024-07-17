@@ -70,39 +70,42 @@
     </style>
     <button class="back-button" onclick="location.href='./Check.html'">カード一覧に戻る</button>
 </head>
-<body>
+<body class="Edit">
     <main>
         
         <div class="container">
             <img src="picture/BINGOcard.JPG" alt="BINGO Card">
-            <textarea class="square-textbox textbox-1"></textarea>
-            <textarea class="square-textbox textbox-2"></textarea>
-            <textarea class="square-textbox textbox-3"></textarea>
-            <textarea class="square-textbox textbox-4"></textarea>
-            <textarea class="square-textbox textbox-5"></textarea>
-            <textarea class="square-textbox textbox-6"></textarea>
-            <textarea class="square-textbox textbox-7"></textarea>
-            <textarea class="square-textbox textbox-8"></textarea>
-            <textarea class="square-textbox textbox-9"></textarea>
-            <textarea class="square-textbox textbox-10"></textarea>
-            <textarea class="square-textbox textbox-11"></textarea>
-            <textarea class="square-textbox textbox-12"></textarea>
-            <textarea class="square-textbox textbox-13"></textarea>
-            <textarea class="square-textbox textbox-14"></textarea>
-            <textarea class="square-textbox textbox-15"></textarea>
-            <textarea class="square-textbox textbox-16"></textarea>
-            <textarea class="square-textbox textbox-17"></textarea>
-            <textarea class="square-textbox textbox-18"></textarea>
-            <textarea class="square-textbox textbox-19"></textarea>
-            <textarea class="square-textbox textbox-20"></textarea>
-            <textarea class="square-textbox textbox-21"></textarea>
-            <textarea class="square-textbox textbox-22"></textarea>
-            <textarea class="square-textbox textbox-23"></textarea>
-            <textarea class="square-textbox textbox-24"></textarea>
-            <textarea class="square-textbox textbox-25"></textarea>
+            <input class="square-textbox textbox-1" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-2" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-3" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-4" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-5" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-6" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-7" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-8" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-9" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-10" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-11" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-12" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-13" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-14" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-15" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-16" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-17" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-18" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-19" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-20" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-21" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-22" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-23" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-24" type ="number" id ="numeric"></input>
+            <input class="square-textbox textbox-25" type ="number" id ="numeric"></input>
             <button class="register-button" id="registerButton">更新</button> <!-- 更新ボタンに変更 -->
         </div>
     </main>
+    <button class="back-button" onclick="location.href='./Title.html'">タイトルに戻る</button>
+    <button class="home-button" onclick="location.href='./Home.html'">ホームに戻る</button>
+    <button class="card-button" onclick="location.href='./Check.html'">カード選択に戻る</button>
     <script>
    
         document.querySelectorAll('.square-textbox').forEach((textbox, index, textboxes) => {
